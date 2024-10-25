@@ -1,4 +1,4 @@
-D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\Mapper\ProductMapper.java
+D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\mapper\ProductMapper.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\OrderItem.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\Product.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\controller\BaseController.java
@@ -11,12 +11,12 @@ D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\impl\Ord
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\impl\ProductServiceImpl.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\query\ProductQuery.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\InventoryService.java
-D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\Mapper\OrderMapper.java
+D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\mapper\OrderMapper.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\impl\InventoryServiceImpl.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\Inventory.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\query\InventoryQuery.java
-D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\Mapper\OrderItemMapper.java
+D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\mapper\OrderItemMapper.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\ProductService.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\dto\ResultBean.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\Order.java
-D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\Mapper\InventoryMapper.java
+D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\mapper\InventoryMapper.java

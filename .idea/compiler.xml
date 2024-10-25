@@ -10,7 +10,7 @@
         <module name="common" />
         <module name="inventory" />
         <module name="standalone-bis" />
-        <module name="bis" />
+        <module name="distributed-bis" />
         <module name="productService" />
         <module name="orderService" />
       </profile>

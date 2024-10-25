@@ -11,6 +11,8 @@
 
     <artifactId>orderService</artifactId>
 
+    <description>订单子系统</description>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
