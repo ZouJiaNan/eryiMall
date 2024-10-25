@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("BisOrderController")
 @RequestMapping("/bis/order")
 public class OrderController extends BaseController{
-    @Autowired
-    ProductService productService;
     @RequestMapping("createOrder")
     public ResultBean createOrder(Order order) {
-        //创建订单
-        productService.getProductById("1");
-        //锁定库存
-        return success(1);
+        //库存模块：锁定库存
+        //优惠模块:优惠卷+优惠活动
+        //积分模块：生成积分
+        //物流模块：计算运费
+        return success(order);
     }
 
     @RequestMapping("payOrder")
