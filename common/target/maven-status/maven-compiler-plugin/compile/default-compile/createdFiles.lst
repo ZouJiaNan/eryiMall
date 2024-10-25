@@ -1,0 +1,10 @@
+com\eryi\domain\Product.class
+com\eryi\domain\OrderItem.class
+com\eryi\domain\Inventory.class
+com\eryi\enums\ResponseCode.class
+com\eryi\domain\query\OrderQuery.class
+com\eryi\domain\query\InventoryQuery.class
+com\eryi\domain\Order.class
+com\eryi\domain\query\ProductQuery.class
+com\eryi\controller\BaseController.class
+com\eryi\dto\ResultBean.class
