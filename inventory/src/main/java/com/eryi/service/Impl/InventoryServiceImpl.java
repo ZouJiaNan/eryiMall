@@ -1,6 +1,7 @@
 package com.eryi.service.Impl;
 
 import com.eryi.domain.Inventory;
+import com.eryi.domain.OrderItem;
 import com.eryi.domain.query.InventoryQuery;
 import com.eryi.mapper.InventoryMapper;
 import com.eryi.service.InventoryService;
@@ -32,5 +33,10 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public List<Inventory> getInventoryList(InventoryQuery inventoryQuery) {
         return inventoryMapper.getInventoryList(inventoryQuery);
+    }
+
+    @Override
+    public int lockStockByProductId(OrderItem orderItem) {
+        return inventoryMapper.lockStockByProductId(orderItem);
     }
 }

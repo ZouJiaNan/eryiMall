@@ -1,16 +1,36 @@
 package com.eryi.controller;
 
 import com.eryi.domain.Inventory;
+import com.eryi.domain.OrderItem;
 import com.eryi.domain.query.InventoryQuery;
+import com.eryi.dto.ResultBean;
 import com.eryi.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
+
 @Controller
-public class InventoryController{
+public class InventoryController extends BaseController{
     @Autowired
     InventoryService inventoryService;
+
+    private final ReentrantLock lock=new ReentrantLock();
+
+    /**
+     * 锁定库存
+     * 即lock_stock+订单购买量&&actual_stock-订单购买数量
+     * @param productId
+     * @param stock
+     * @return
+     */
+    public ResultBean lockStock(String productId, int stock){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProductId(productId);
+        orderItem.setCount(stock);
+        return success(inventoryService.lockStockByProductId(orderItem));
+    }
     public int addInventory(Inventory inventory) {
         return inventoryService.addInventory(inventory);
     }

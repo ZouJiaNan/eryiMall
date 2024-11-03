@@ -6,7 +6,7 @@ public class OrderItem {
     private String id;
     private String orderId;
     private String productId;
-    private String count;
+    private int count;
 
     private Date create_time;
 
@@ -38,11 +38,11 @@ public class OrderItem {
         this.productId = productId;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 

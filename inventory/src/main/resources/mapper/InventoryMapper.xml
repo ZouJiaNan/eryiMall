@@ -48,6 +48,12 @@
         WHERE id = #{id}
     </select>
 
+    <update id="lockStockByProductId" parameterType="com.eryi.domain.OrderItem">
+        UPDATE inventory
+        SET lock_stock = lock_stock - #{count},
+            actual_stock = actual_stock + #{count}; where product_id=#{productId};
+    </update>
+
     <!-- 分页查询库存列表 -->
     <select id="getInventoryList" parameterType="com.eryi.domain.query.InventoryQuery" resultMap="InventoryResultMap">
         SELECT *
