@@ -1,6 +1,7 @@
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\mapper\ProductMapper.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\OrderItem.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\Product.java
+D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\service\impl\RocketMQConsumer.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\controller\BaseController.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\enums\ResponseCode.java
 D:\IDEAWorkSpace\eryiMall\standalone-bis\src\main\java\com\eryi\domain\query\OrderQuery.java

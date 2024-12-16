@@ -10,6 +10,7 @@ com\eryi\dto\ResultBean.class
 com\eryi\mapper\ProductMapper.class
 com\eryi\domain\OrderItem.class
 com\eryi\domain\query\InventoryQuery.class
+com\eryi\service\impl\RocketMQConsumer.class
 com\eryi\domain\Product.class
 com\eryi\Main.class
 com\eryi\service\impl\ProductServiceImpl.class

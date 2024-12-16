@@ -13,7 +13,7 @@
         <module>productService</module>
         <module>orderService</module>
         <module>inventory</module>
-        <module>bis</module>
+        <module>distributed-bis</module>
         <module>standalone-bis</module>
     </modules>
 
