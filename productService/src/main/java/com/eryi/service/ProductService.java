@@ -1,7 +1,7 @@
 package com.eryi.service;
 
-import com.eryi.domain.Product;
-import com.eryi.domain.query.ProductQuery;
+import com.eryi.bo.Product;
+import com.eryi.bo.query.ProductQuery;
 
 import java.util.List;
 

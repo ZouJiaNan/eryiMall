@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.OrderMapper">
     <!-- ResultMap 定义 -->
-    <resultMap id="OrderResultMap" type="com.eryi.domain.Order">
+    <resultMap id="OrderResultMap" type="com.eryi.bo.Order">
         <id property="id" column="id" />
         <result property="orderNum" column="order_num" />
         <result property="state" column="state" />
@@ -28,7 +28,7 @@
     </select>
 
     <!-- 分页查询订单列表 -->
-    <select id="getOrderList" parameterType="com.eryi.domain.OrderQuery" resultMap="OrderResultMap">
+    <select id="getOrderList" parameterType="com.eryi.bo.OrderQuery" resultMap="OrderResultMap">
         SELECT o.*, oi.id AS order_item_id, oi.order_id, oi.product_id, oi.quantity, oi.price
         FROM order o
         LEFT JOIN order_item oi ON o.id = oi.order_id
@@ -50,7 +50,7 @@
     </select>
 
     <!-- 添加订单 -->
-    <insert id="addOrder" parameterType="com.eryi.domain.Order">
+    <insert id="addOrder" parameterType="com.eryi.bo.Order">
         INSERT INTO order (
             id,
             order_num,
@@ -67,7 +67,7 @@
     </insert>
 
     <!-- 更新订单 -->
-    <update id="updateOrder" parameterType="com.eryi.domain.Order">
+    <update id="updateOrder" parameterType="com.eryi.bo.Order">
         UPDATE order
         SET
             order_num = #{orderNum},

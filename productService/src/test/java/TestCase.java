@@ -1,6 +1,5 @@
 import com.eryi.Main;
-import com.eryi.domain.Product;
-import com.eryi.domain.query.ProductQuery;
+import com.eryi.bo.query.ProductQuery;
 import com.eryi.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,8 @@
 package com.eryi.mapper;
 
-import com.eryi.domain.Product;
-import com.eryi.domain.query.ProductQuery;
+import com.eryi.bo.Product;
+import com.eryi.bo.query.ProductQuery;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

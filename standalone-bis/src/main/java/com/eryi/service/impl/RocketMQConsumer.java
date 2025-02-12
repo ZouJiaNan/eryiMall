@@ -1,6 +1,6 @@
 package com.eryi.service.impl;
 
-import com.eryi.domain.Order;
+import com.eryi.bean.bo.Order;
 import com.eryi.service.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

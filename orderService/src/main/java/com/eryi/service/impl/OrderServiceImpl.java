@@ -1,7 +1,7 @@
 package com.eryi.service.impl;
 
-import com.eryi.domain.Order;
-import com.eryi.domain.query.OrderQuery;
+import com.eryi.bo.Order;
+import com.eryi.bo.query.OrderQuery;
 import com.eryi.mapper.OrderMapper;
 import com.eryi.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

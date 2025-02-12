@@ -15,6 +15,7 @@
         <module>inventory</module>
         <module>distributed-bis</module>
         <module>standalone-bis</module>
+        <module>Test</module>
     </modules>
 
     <properties>

@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common" />
-        <module name="inventory" />
         <module name="standalone-bis" />
+        <module name="Test" />
+        <module name="orderService" />
+        <module name="inventory" />
         <module name="bis" />
         <module name="productService" />
-        <module name="orderService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

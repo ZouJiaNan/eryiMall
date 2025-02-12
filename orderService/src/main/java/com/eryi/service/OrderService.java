@@ -1,7 +1,7 @@
 package com.eryi.service;
 
-import com.eryi.domain.Order;
-import com.eryi.domain.query.OrderQuery;
+import com.eryi.bo.Order;
+import com.eryi.bo.query.OrderQuery;
 
 import java.util.List;
 

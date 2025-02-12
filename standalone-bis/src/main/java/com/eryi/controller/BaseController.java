@@ -1,6 +1,6 @@
 package com.eryi.controller;
 
-import com.eryi.dto.ResultBean;
+import com.eryi.bean.dto.ResultBean;
 import com.eryi.enums.ResponseCode;
 
 public class BaseController {

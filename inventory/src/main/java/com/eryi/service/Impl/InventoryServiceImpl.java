@@ -1,8 +1,8 @@
 package com.eryi.service.Impl;
 
-import com.eryi.domain.Inventory;
-import com.eryi.domain.OrderItem;
-import com.eryi.domain.query.InventoryQuery;
+import com.eryi.bo.Inventory;
+import com.eryi.bo.OrderItem;
+import com.eryi.bo.query.InventoryQuery;
 import com.eryi.mapper.InventoryMapper;
 import com.eryi.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;

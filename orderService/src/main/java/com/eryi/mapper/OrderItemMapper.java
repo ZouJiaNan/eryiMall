@@ -1,7 +1,7 @@
 package com.eryi.mapper;
 
-import com.eryi.domain.Order;
-import com.eryi.domain.OrderItem;
+import com.eryi.bo.Order;
+import com.eryi.bo.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

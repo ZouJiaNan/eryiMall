@@ -1,8 +1,8 @@
 package com.eryi.service;
 
-import com.eryi.domain.Inventory;
-import com.eryi.domain.OrderItem;
-import com.eryi.domain.query.InventoryQuery;
+import com.eryi.bo.Inventory;
+import com.eryi.bo.OrderItem;
+import com.eryi.bo.query.InventoryQuery;
 
 import java.util.List;
 

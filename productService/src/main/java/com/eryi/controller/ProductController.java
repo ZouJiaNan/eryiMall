@@ -1,6 +1,6 @@
 package com.eryi.controller;
 
-import com.eryi.domain.Product;
+import com.eryi.bo.Product;
 import com.eryi.dto.ResultBean;
 import com.eryi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

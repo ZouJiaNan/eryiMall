@@ -6,7 +6,7 @@
 <mapper namespace="com.eryi.mapper.InventoryMapper">
 
     <!-- 定义 ResultMap -->
-    <resultMap id="InventoryResultMap" type="com.eryi.domain.Inventory">
+    <resultMap id="InventoryResultMap" type="com.eryi.bo.Inventory">
         <id property="id" column="id"/>
         <result property="productId" column="product_id"/>
         <result property="actualStock" column="actual_stock"/>
@@ -19,7 +19,7 @@
     </resultMap>
 
     <!-- 添加库存 -->
-    <insert id="addInventory" parameterType="com.eryi.domain.Inventory">
+    <insert id="addInventory" parameterType="com.eryi.bo.Inventory">
         INSERT INTO inventory (
             id, product_id, actual_stock, lock_stock, pending_in_stock, pending_out_stock, warm_up_line, in_stock_price, out_stock_price
         ) VALUES (
@@ -28,7 +28,7 @@
     </insert>
 
     <!-- 更新库存 -->
-    <update id="updateInventory" parameterType="com.eryi.domain.Inventory">
+    <update id="updateInventory" parameterType="com.eryi.bo.Inventory">
         UPDATE inventory
         SET product_id = #{productId},
             actual_stock = #{actualStock},
@@ -48,14 +48,14 @@
         WHERE id = #{id}
     </select>
 
-    <update id="lockStockByProductId" parameterType="com.eryi.domain.OrderItem">
+    <update id="lockStockByProductId" parameterType="com.eryi.bo.OrderItem">
         UPDATE inventory
         SET lock_stock = lock_stock - #{count},
             actual_stock = actual_stock + #{count}; where product_id=#{productId};
     </update>
 
     <!-- 分页查询库存列表 -->
-    <select id="getInventoryList" parameterType="com.eryi.domain.query.InventoryQuery" resultMap="InventoryResultMap">
+    <select id="getInventoryList" parameterType="com.eryi.bo.query.InventoryQuery" resultMap="InventoryResultMap">
         SELECT *
         FROM inventory
         <where>
