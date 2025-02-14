@@ -1,23 +1,23 @@
-package com.eryi.bean.bo.shop;
+package com.eryi.bean.dto;
 
+import com.eryi.bean.bo.shop.RegionTemplate;
+import com.eryi.bean.bo.shop.Shop;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 运费模板
- */
 @Data
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
-public class ShipingFeeTemp {
+@Setter
+public class ShipingFeeTempDto {
     private String id;
     /**
      * 商铺
      */
-    private Shop shop;
+    private String shopId;
     /**
      * 名称
      */
@@ -31,8 +31,4 @@ public class ShipingFeeTemp {
      * 1-计费、2-计件、3-计体积
      */
     private int type;
-
-    public ShipingFeeTemp() {
-        this.regionTemplateList = new ArrayList<>();
-    }
 }

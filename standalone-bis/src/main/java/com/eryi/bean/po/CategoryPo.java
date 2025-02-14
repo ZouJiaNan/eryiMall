@@ -1,18 +1,14 @@
-package com.eryi.bean.bo.product;
+package com.eryi.bean.po;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
-
-/**
- * 商品分类
- */
 @Data
-@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
-public class Category {
+@Getter
+public class CategoryPo {
     private String id;
     /**
      * 分类名称
@@ -25,13 +21,9 @@ public class Category {
     /**
      * 父分类
      */
-    private Category parentCategory;
+    private String parentId;
     /**
      * 平台分成比列 %
      */
     private BigDecimal platformDivision;
-
-    public Category(){
-        parentCategory=new Category();
-    }
 }

@@ -10,9 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>common</module>
-        <module>productService</module>
-        <module>orderService</module>
-        <module>inventory</module>
         <module>distributed-bis</module>
         <module>standalone-bis</module>
         <module>Test</module>

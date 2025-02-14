@@ -10,14 +10,14 @@
         <module name="common" />
         <module name="standalone-bis" />
         <module name="Test" />
-        <module name="orderService" />
-        <module name="inventory" />
         <module name="bis" />
-        <module name="productService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="distributed-bis" target="1.8" />
+      <module name="inventory" target="1.8" />
+      <module name="orderService" target="1.8" />
+      <module name="productService" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

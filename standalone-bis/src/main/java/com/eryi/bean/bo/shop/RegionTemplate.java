@@ -1,10 +1,17 @@
 package com.eryi.bean.bo.shop;
 
+import lombok.*;
+
 import java.math.BigDecimal;
 
 /**
  * 地区模板
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class RegionTemplate {
     /**
      * 地区编码

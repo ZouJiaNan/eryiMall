@@ -33,20 +33,6 @@ public class Test {
                 msg.setDelayTimeLevel(16);
                 //同步发送
                 SendResult sendResult = producer.send(msg);
-                /**异步发送，通过自定义回调函数的方式来触发响应
-                 producer.send(msg, new SendCallback() {
-                @Override
-                public void onSuccess(SendResult sendResult) {
-                countDownLatch.countDown();
-                System.out.printf("%-10d OK %s %n", index, sendResult.getMsgId());
-                }
-                @Override
-                public void onException(Throwable e) {
-                countDownLatch.countDown();
-                System.out.printf("%-10d Exception %s %n", index, e);
-                e.printStackTrace();
-                }
-                }**/
                 System.out.printf("%s%n", sendResult);
             } catch (Exception e) {
                 e.printStackTrace();
