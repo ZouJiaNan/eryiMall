@@ -2,36 +2,45 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.mapper.OrderItemMapper">
-    <resultMap id="OrderItemResultMap" type="com.eryi.bean.bo.pay.order.OrderItem">
-        <id property="id" column="id" />
-        <result property="orderId" column="order_id" />
-        <result property="prodcutId" column="product_id" />
-        <result property="count" column="count" />
-        <result property="update_time" column="update_time" />
-        <result property="create_time" column="create_time" />
+<mapper namespace="com.eryi.bean.dto.mapper.CarItemMapper">
+
+    <resultMap id="CarItemResultMap" type="com.eryi.bean.po.CarItemPo">
+        <id property="carId" column="car_id" />
+        <result property="onSaleId" column="on_sale_id" />
     </resultMap>
-    <insert id="addOrderitem">
-        INSERT INTO orderitem (
-            id,
-            order_id,
-            product_id,
-            count,
-            create_time,
-            update_time
-        ) VALUES (
-                     #{id},
-                     #{order_id},
-                     #{product_id},
-                     #{count},
-                     #{create_time},
-                     #{update_time}
-                 )
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.eryi.bean.po.CarItemPo" useGeneratedKeys="true" keyProperty="carId">
+        INSERT INTO car_item (
+            on_sale_id
+        )
+        VALUES (
+                   #{onSaleId}
+               )
     </insert>
-    <select id="getOrderItemById" parameterType="java.lang.String" resultMap="OrderItemResultMap">
-        SELECT * FROM orderitem WHERE id=#{id};
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="String">
+        DELETE FROM car_item WHERE car_id = #{carId}
+    </delete>
+
+    <!-- 动态更新 -->
+    <update id="updateById" parameterType="com.eryi.bean.po.CarItemPo">
+        UPDATE car_item
+        <set>
+            <if test="onSaleId != null">on_sale_id = #{onSaleId}</if>
+        </set>
+        WHERE car_id = #{carId}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="String" resultMap="CarItemResultMap">
+        SELECT * FROM car_item WHERE car_id = #{carId}
     </select>
-    <select id="getOrderItemsByOrderId" parameterType="java.lang.String" resultMap="OrderItemResultMap">
-        SELECT * FROM orderitem WHERE order_id=#{order_id};
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultMap="CarItemResultMap">
+        SELECT * FROM car_item
     </select>
+
 </mapper>

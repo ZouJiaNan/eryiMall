@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eryi.bean.dto.mapper.RegionTemplateMapper">
+    <insert id="insertRegionTemplate" parameterType="com.eryi.bean.bo.shop.RegionTemplate">
+        INSERT INTO region_template (
+        area_code, area_name, first_unit, first_unit_price, next_unit, next_unit_price, free_condition
+        )
+        VALUES
+        <foreach collection="list" item="regionTemplate" separator=",">
+            (
+            #{regionTemplate.areaCode}, #{regionTemplate.areaName}, #{regionTemplate.firstUnit},
+            #{regionTemplate.firstUnitPrice}, #{regionTemplate.nextUnit}, #{regionTemplate.nextUnitPrice},
+            #{regionTemplate.freeCondition}
+            )
+        </foreach>
+    </insert>
+</mapper>

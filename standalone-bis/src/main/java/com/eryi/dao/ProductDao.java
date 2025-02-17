@@ -1,11 +1,8 @@
 package com.eryi.dao;
 
-import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.bo.product.Product;
-import com.eryi.bean.dto.ProductDto;
-import com.eryi.bean.dto.ResultBean;
 import com.eryi.bean.po.ProductPo;
-import com.eryi.mapper.ProductMapper;
+import com.eryi.bean.dto.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

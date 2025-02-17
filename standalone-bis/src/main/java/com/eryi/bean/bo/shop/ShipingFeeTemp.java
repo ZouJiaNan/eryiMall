@@ -1,5 +1,7 @@
 package com.eryi.bean.bo.shop;
 
+import com.eryi.dao.RegionTemplateDao;
+import com.eryi.dao.ShipingFeeTempDao;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 public class ShipingFeeTemp {
+    private ShipingFeeTempDao shipingFeeTempDao;
     private String id;
     /**
      * …Ã∆Ã
@@ -34,5 +37,9 @@ public class ShipingFeeTemp {
 
     public ShipingFeeTemp() {
         this.regionTemplateList = new ArrayList<>();
+    }
+
+    public int addRegionTemplate(List<RegionTemplate> regionTemplateList){
+        return shipingFeeTempDao.addRegionTemplate(regionTemplateList);
     }
 }

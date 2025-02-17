@@ -1,4 +1,4 @@
-package com.eryi.mapper;
+package com.eryi.bean.dto.mapper;
 
 import com.eryi.bean.bo.product.Product;
 import com.eryi.bean.dto.ProductDto;

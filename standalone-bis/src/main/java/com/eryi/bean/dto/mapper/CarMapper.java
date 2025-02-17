@@ -1,4 +1,4 @@
-package com.eryi.mapper;
+package com.eryi.bean.dto.mapper;
 
 import com.eryi.bean.bo.customer.Car;
 import org.apache.ibatis.annotations.Mapper;

@@ -2,7 +2,7 @@ package com.eryi.dao;
 
 import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.po.CategoryPo;
-import com.eryi.mapper.CategoryMapper;
+import com.eryi.bean.dto.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

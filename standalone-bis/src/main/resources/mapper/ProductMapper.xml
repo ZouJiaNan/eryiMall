@@ -2,42 +2,66 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.mapper.ProductMapper">
-    <resultMap id="ProductResultMap" type="com.eryi.bean.bo.product.Product">
+<mapper namespace="com.eryi.bean.dto.mapper.ProductMapper">
+    <resultMap id="ProductResultMap" type="com.eryi.bean.po.ProductPo">
+        <!-- 原有字段映射保持不动 -->
         <id property="id" column="id" />
         <result property="name" column="name" />
         <result property="categoryId" column="category_id" />
-        <result property="images" column="images" />
-        <result property="model" column="model" />
-        <result property="state" column="state" />
-        <result property="salePrice" column="sale_price" />
-        <result property="createTime" column="create_time" />
-        <result property="updateTime" column="update_time" />
+        <result property="specs" column="specs" />
+        <result property="tags" column="tags" />
+        <result property="platformDivision" column="platform_division" />
+        <result property="imags" column="imags" />
+        <result property="associatedProdIds" column="associated_prod_ids" />
+        <result property="couponDiscountId" column="coupon_discount_id" />
+        <result property="shipingFeeTempId" column="shiping_fee_temp_id" />
+        <result property="shopId" column="shop_id" />
     </resultMap>
-    <insert id="addProduct" parameterType="com.eryi.bean.bo.product.Product">
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.eryi.bean.po.ProductPo">
         INSERT INTO product (
-            id,
-            name,
-            category_id,
-            images,
-            model,
-            state,
-            sale_price,
-            create_time,
-            update_time
-        ) VALUES (
-                     #{id},
-                     #{name},
-                     #{categoryId},
-                     #{images},
-                     #{model},
-                     #{state},
-                     #{salePrice},
-                     #{createTime},
-                     #{updateTime}
-                 )
+            id,name, category_id, specs, tags, platform_division,
+            imags, associated_prod_ids, coupon_discount_id,
+            shiping_fee_temp_id, shop_id
+        )
+        VALUES (
+                   #{id},#{name}, #{categoryId}, #{specs}, #{tags}, #{platformDivision},
+                   #{imags}, #{associatedProdIds}, #{couponDiscountId},
+                   #{shipingFeeTempId}, #{shopId}
+               )
     </insert>
-    <select id="getProductById" parameterType="com.eryi.bean.bo.product.Product" resultType="com.eryi.bean.bo.product.Product">
-        select * from product where id=#{id};
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM product WHERE id = #{id}
+    </delete>
+
+    <!-- 动态更新 -->
+    <update id="updateById" parameterType="com.eryi.bean.po.ProductPo">
+        UPDATE product
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="specs != null">specs = #{specs},</if>
+            <if test="tags != null">tags = #{tags},</if>
+            <if test="platformDivision != null">platform_division = #{platformDivision},</if>
+            <if test="imags != null">imags = #{imags},</if>
+            <if test="associatedProdIds != null">associated_prod_ids = #{associatedProdIds},</if>
+            <if test="couponDiscountId != null">coupon_discount_id = #{couponDiscountId},</if>
+            <if test="shipingFeeTempId != null">shiping_fee_temp_id = #{shipingFeeTempId},</if>
+            <if test="shopId != null">shop_id = #{shopId}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="Long" resultMap="ProductResultMap">
+        SELECT * FROM product WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultMap="ProductResultMap">
+        SELECT * FROM product
     </select>
 </mapper>

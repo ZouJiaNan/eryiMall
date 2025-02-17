@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eryi.bean.dto.mapper.ShipingFeeTempMapper">
+    <resultMap id="RegionTemplateMap" type="com.eryi.bean.bo.shop.RegionTemplate">
+        <id property="itemId" column="item_id"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="areaName" column="area_name"/>
+        <result property="firstUnit" column="first_unit"/>
+        <result property="firstUnitPrice" column="firstUnit_price"/>
+        <result property="nextUnit" column="next_unit"/>
+        <result property="nextUnitPrice" column="next_unit_price"/>
+        <result property="freeCondition" column="free_condition"/>
+    </resultMap>
+    <resultMap id="ShipingFeeTempResultMap" type="com.eryi.bean.bo.shop.ShipingFeeTemp">
+        <id property="id" column="id" />
+        <result property="shopId" column="shop_id" />
+        <result property="name" column="name" />
+        <result property="type" column="type" />
+        <collection property="regionTemplateList" ofType="com.eryi.bean.bo.shop.RegionTemplate" resultMap="RegionTemplateMap"/>
+    </resultMap>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.eryi.bean.po.ShipingFeeTempPo">
+        INSERT INTO shiping_fee_temp (
+            id,shop_id, name, region_ids, type
+        )
+        VALUES (
+                   #{id},#{shopId}, #{name}, #{regionIds}, #{type}
+               )
+    </insert>
+
+    <!-- 根据ID删除 -->
+    <delete id="deleteById" parameterType="String">
+        DELETE FROM shiping_fee_temp WHERE id = #{id}
+    </delete>
+
+    <!-- 动态更新 -->
+    <update id="updateById" parameterType="com.eryi.bean.po.ShipingFeeTempPo">
+        UPDATE shiping_fee_temp
+        <set>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="regionIds != null">region_ids = #{regionIds},</if>
+            <if test="type != null">type = #{type}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="findById" parameterType="String" resultMap="ShipingFeeTempResultMap">
+        SELECT * FROM shiping_fee_temp WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultMap="ShipingFeeTempResultMap">
+        SELECT * FROM shiping_fee_temp
+    </select>
+
+</mapper>

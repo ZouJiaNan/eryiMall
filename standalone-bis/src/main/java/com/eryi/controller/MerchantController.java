@@ -10,6 +10,8 @@ import com.eryi.bean.dto.ShipingFeeTempDto;
 import com.eryi.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -18,6 +20,7 @@ import java.util.UUID;
  * 商家相关接口
  */
 @RestController
+@RequestMapping("/bis/merchant/")
 public class MerchantController extends BaseController {
     @Autowired
     MerchantService merchantService;
@@ -41,7 +44,7 @@ public class MerchantController extends BaseController {
      * @param categoryDto
      * @return
      */
-    @PostMapping("/addCategory")
+    @PostMapping("/category")
     public ResultBean addCategory(CategoryDto categoryDto) {
         Category category = new Category();
         category.setId(UUID.randomUUID()+"");
@@ -74,8 +77,8 @@ public class MerchantController extends BaseController {
     /**
      * 新增运费模板
      */
-    @PostMapping("/ShipFeeTemp")
-    public ResultBean addShipingFeeTemp(ShipingFeeTempDto shipingFeeTempDto) {
+    @PostMapping("/shipFeeTemp")
+    public ResultBean addShipingFeeTemp(@RequestBody ShipingFeeTempDto shipingFeeTempDto) {
         ShipingFeeTemp shipingFeeTemp = new ShipingFeeTemp();
         shipingFeeTemp.setId(UUID.randomUUID()+"");
         shipingFeeTemp.setName(shipingFeeTempDto.getName());
