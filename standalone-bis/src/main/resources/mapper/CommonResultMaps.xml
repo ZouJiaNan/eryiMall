@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eryi.mapper.CommonResultMaps">
+    <!--用户-->
+    <resultMap id="UserResultMap" type="com.eryi.bean.bo.common.User">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="pass_word"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="picture" column="picture"/>
+    </resultMap>
+    <!--商店-->
+    <resultMap id="ShopResultMap" type="com.eryi.bean.bo.shop.Shop">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="code" column="code" />
+        <result property="status" column="status" />
+    </resultMap>
+    <!--地区模板-->
+    <resultMap id="RegionTemplateResultMap" type="com.eryi.bean.bo.shop.RegionTemplate">
+        <id property="shipingFeeTempId" column="shiping_fee_temp_id" />
+        <result property="areaCode" column="area_code" />
+        <result property="areaName" column="area_name" />
+        <result property="firstUnit" column="first_unit" />
+        <result property="firstUnitPrice" column="first_unit_price" />
+        <result property="nextUnit" column="next_unit" />
+        <result property="nextUnitPrice" column="next_unit_price" />
+        <result property="freeCondition" column="free_condition" />
+    </resultMap>
+    <!--运费模板-->
+    <resultMap id="ShipingFeeTempResultMap" type="com.eryi.bean.bo.shop.ShipingFeeTemp">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="type" column="type" />
+        <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
+        <collection property="regionTemplateList" ofType="com.eryi.bean.bo.shop.RegionTemplate" resultMap="RegionTemplateResultMap"/>
+    </resultMap>
+    <!--分类-->
+    <resultMap id="categoryResultMap" type="com.eryi.bean.bo.product.Category">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="parentId" column="parent_id" />
+        <result property="level" column="level" />
+        <result property="platformDivision" column="platform_division" />
+        <association property="parentCategory" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
+    </resultMap>
+    <!--商品-->
+    <resultMap id="ProductResultMap" type="com.eryi.bean.bo.product.Product">
+        <id property="id" column="id" />
+        <result property="name" column="category_id" />
+        <result property="specs" column="specs" />
+        <result property="tags" column="tags" />
+        <result property="platformDivision" column="platform_division" />
+        <result property="imags" column="imags" />
+        <association property="shipingFeeTemp" javaType="com.eryi.bean.bo.shop.ShipingFeeTemp" resultMap="ShipingFeeTempResultMap"/>
+        <association property="category" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
+        <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
+    </resultMap>
+    <!--销售信息-->
+    <resultMap id="onsaleResultMap" type="com.eryi.bean.bo.product.OnSale">
+        <result property="id" column="id"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="price" column="price"/>
+        <result property="amount" column="amount"/>
+        <result property="remain" column="remain"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="listingStatus" column="listing_status"/>
+        <result property="salePrice" column="sale_price"/>
+        <association property="product" javaType="com.eryi.bean.bo.product.Product" resultMap="ProductResultMap"/>
+    </resultMap>
+    <!--购物车-->
+    <resultMap id="CarResultMap" type="com.eryi.bean.bo.customer.Car">
+        <id property="id" column="id" />
+        <association property="product" javaType="com.eryi.bean.bo.common.User" resultMap="UserResultMap"/>
+    </resultMap>
+</mapper>

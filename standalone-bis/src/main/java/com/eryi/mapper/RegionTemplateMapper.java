@@ -1,4 +1,4 @@
-package com.eryi.bean.dto.mapper;
+package com.eryi.mapper;
 
 import com.eryi.bean.bo.shop.RegionTemplate;
 import com.eryi.bean.po.RegionTemplatePo;

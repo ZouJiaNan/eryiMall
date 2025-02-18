@@ -11,6 +11,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RegionTemplatePo {
     /**
+     * 所属运费模板ID
+     */
+    private String shipingFeeTempId;
+    /**
      * 地区编码
      */
     private String areaCode;

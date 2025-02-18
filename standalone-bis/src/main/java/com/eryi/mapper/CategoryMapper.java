@@ -1,4 +1,4 @@
-package com.eryi.bean.dto.mapper;
+package com.eryi.mapper;
 
 import com.eryi.bean.po.CategoryPo;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,9 +1,11 @@
 package com.eryi.bean.bo.shop;
 
+import com.eryi.bean.po.RegionTemplatePo;
 import com.eryi.dao.RegionTemplateDao;
 import com.eryi.dao.ShipingFeeTempDao;
 import lombok.*;
 
+import javax.swing.plaf.synth.Region;
 import java.util.ArrayList;
 import java.util.List;
 

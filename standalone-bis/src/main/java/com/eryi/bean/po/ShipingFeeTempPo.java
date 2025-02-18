@@ -22,10 +22,6 @@ public class ShipingFeeTempPo {
      */
     private String name;
     /**
-     * 地区模板
-     */
-    private String regionIds;
-    /**
      * 计费规则
      * 1-计费、2-计件、3-计体积
      */

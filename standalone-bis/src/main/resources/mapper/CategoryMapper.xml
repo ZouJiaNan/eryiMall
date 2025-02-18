@@ -2,23 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.bean.dto.mapper.CategoryMapper">
-
-    <resultMap id="CategoryResultMap" type="com.eryi.bean.po.CategoryPo">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <result property="level" column="level" />
-        <result property="parentId" column="parent_id" />
-        <result property="platformDivision" column="platform_division" />
-    </resultMap>
-
-    <!-- 新增 -->
-    <insert id="insert" parameterType="com.eryi.bean.po.CategoryPo" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="com.eryi.mapper.CategoryMapper">
+    <insert id="addCategory" parameterType="com.eryi.bean.po.CategoryPo">
         INSERT INTO category (
-            name, level, parent_id, platform_division
+            id,name, level, parent_id, platform_division
         )
         VALUES (
-                   #{name}, #{level}, #{parentId}, #{platformDivision}
+                   #{id},#{name}, #{level}, #{parentId}, #{platformDivision}
                )
     </insert>
 

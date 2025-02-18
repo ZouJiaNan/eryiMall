@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eryi.mapper.OnSaleMapper">
+    <insert id="addOnSale" parameterType="com.eryi.bean.po.OnSalePo">
+        INSERT INTO onsale (
+            id,
+            order_num,
+            price,
+            amount,
+            remain,
+            start_time,
+            end_time,
+            listing_status,
+            product_id,
+            sale_price
+        )
+        VALUES (
+                   #{id},
+                   #{orderNum},
+                   #{price},
+                   #{amount},
+                   #{remain},
+                   #{startTime},
+                   #{endTime},
+                   #{listingStatus},
+                   #{productId},
+                   #{salePrice}
+               )
+    </insert>
+    <update id="editOnSale" parameterType="com.eryi.bean.po.OnSalePo">
+        UPDATE onsale
+        SET
+            order_num = #{orderNum},
+            price = #{price},
+            amount = #{amount},
+            remain = #{remain},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            listing_status = #{listingStatus},
+            product_id = #{productId},
+            sale_price = #{salePrice}
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>

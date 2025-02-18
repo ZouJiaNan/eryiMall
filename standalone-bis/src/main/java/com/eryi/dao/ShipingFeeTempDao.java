@@ -2,10 +2,10 @@ package com.eryi.dao;
 
 import com.eryi.bean.bo.shop.RegionTemplate;
 import com.eryi.bean.bo.shop.ShipingFeeTemp;
-import com.eryi.bean.dto.mapper.RegionTemplateMapper;
+import com.eryi.mapper.RegionTemplateMapper;
 import com.eryi.bean.po.RegionTemplatePo;
 import com.eryi.bean.po.ShipingFeeTempPo;
-import com.eryi.bean.dto.mapper.ShipingFeeTempMapper;
+import com.eryi.mapper.ShipingFeeTempMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +28,8 @@ public class ShipingFeeTempDao {
         ShipingFeeTempPo shipingFeeTempPo = new ShipingFeeTempPo();
         shipingFeeTempPo.setId(shipingFeeTemp.getId());
         shipingFeeTempPo.setName(shipingFeeTemp.getName());
+        shipingFeeTempPo.setType(shipingFeeTemp.getType());
+        shipingFeeTempPo.setShopId(shipingFeeTemp.getShop().getId());
         int i = shipingFeeTempMapper.addShipingFeeTemp(shipingFeeTempPo);
         return i;
     }
@@ -42,9 +44,11 @@ public class ShipingFeeTempDao {
         List<RegionTemplatePo> list=new ArrayList<>();
         regionTemplateList.forEach(regionTemplate -> {
             RegionTemplatePo regionTemplatePo=new RegionTemplatePo();
+            regionTemplatePo.setShipingFeeTempId(regionTemplate.getShipingFeeTempId());
             regionTemplatePo.setAreaCode(regionTemplate.getAreaCode());
             regionTemplatePo.setAreaName(regionTemplate.getAreaName());
             regionTemplatePo.setFirstUnit(regionTemplate.getFirstUnit());
+            regionTemplatePo.setFirstUnitPrice(regionTemplate.getFirstUnitPrice());
             regionTemplatePo.setFreeCondition(regionTemplate.getFreeCondition());
             regionTemplatePo.setNextUnitPrice(regionTemplate.getNextUnitPrice());
             regionTemplatePo.setNextUnit(regionTemplate.getNextUnit());

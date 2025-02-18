@@ -14,6 +14,10 @@ import java.math.BigDecimal;
 @Getter
 public class RegionTemplate {
     /**
+     * 所属运费模板ID
+     */
+    private String shipingFeeTempId;
+    /**
      * 地区编码
      */
     private String areaCode;

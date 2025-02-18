@@ -2,36 +2,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.bean.dto.mapper.ShipingFeeTempMapper">
-    <resultMap id="RegionTemplateMap" type="com.eryi.bean.bo.shop.RegionTemplate">
-        <id property="itemId" column="item_id"/>
-        <result property="areaCode" column="area_code"/>
-        <result property="areaName" column="area_name"/>
-        <result property="firstUnit" column="first_unit"/>
-        <result property="firstUnitPrice" column="firstUnit_price"/>
-        <result property="nextUnit" column="next_unit"/>
-        <result property="nextUnitPrice" column="next_unit_price"/>
-        <result property="freeCondition" column="free_condition"/>
-    </resultMap>
-    <resultMap id="ShipingFeeTempResultMap" type="com.eryi.bean.bo.shop.ShipingFeeTemp">
-        <id property="id" column="id" />
-        <result property="shopId" column="shop_id" />
-        <result property="name" column="name" />
-        <result property="type" column="type" />
-        <collection property="regionTemplateList" ofType="com.eryi.bean.bo.shop.RegionTemplate" resultMap="RegionTemplateMap"/>
-    </resultMap>
+<mapper namespace="com.eryi.mapper.ShipingFeeTempMapper">
 
-    <!-- 新增 -->
-    <insert id="insert" parameterType="com.eryi.bean.po.ShipingFeeTempPo">
+    <insert id="addShipingFeeTemp" parameterType="com.eryi.bean.po.ShipingFeeTempPo">
         INSERT INTO shiping_fee_temp (
-            id,shop_id, name, region_ids, type
+            id,shop_id, name, type
         )
         VALUES (
-                   #{id},#{shopId}, #{name}, #{regionIds}, #{type}
+                   #{id},#{shopId}, #{name}, #{type}
                )
     </insert>
 
-    <!-- 根据ID删除 -->
     <delete id="deleteById" parameterType="String">
         DELETE FROM shiping_fee_temp WHERE id = #{id}
     </delete>

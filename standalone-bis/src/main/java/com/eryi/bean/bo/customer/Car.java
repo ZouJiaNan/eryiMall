@@ -19,7 +19,6 @@ import java.util.List;
 public class Car {
     private CarDao carDao;
     private String id;
-    private Product product;
     private User user;
     private List<CarItem> items;
 

@@ -2,24 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.bean.dto.mapper.ProductMapper">
-    <resultMap id="ProductResultMap" type="com.eryi.bean.po.ProductPo">
-        <!-- 原有字段映射保持不动 -->
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <result property="categoryId" column="category_id" />
-        <result property="specs" column="specs" />
-        <result property="tags" column="tags" />
-        <result property="platformDivision" column="platform_division" />
-        <result property="imags" column="imags" />
-        <result property="associatedProdIds" column="associated_prod_ids" />
-        <result property="couponDiscountId" column="coupon_discount_id" />
-        <result property="shipingFeeTempId" column="shiping_fee_temp_id" />
-        <result property="shopId" column="shop_id" />
-    </resultMap>
-
-    <!-- 新增 -->
-    <insert id="insert" parameterType="com.eryi.bean.po.ProductPo">
+<mapper namespace="com.eryi.mapper.ProductMapper">
+    <insert id="addProduct" parameterType="com.eryi.bean.po.ProductPo">
         INSERT INTO product (
             id,name, category_id, specs, tags, platform_division,
             imags, associated_prod_ids, coupon_discount_id,

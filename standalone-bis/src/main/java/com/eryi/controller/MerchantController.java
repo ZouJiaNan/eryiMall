@@ -1,12 +1,11 @@
 package com.eryi.controller;
 
 import com.eryi.bean.bo.product.Category;
+import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
 import com.eryi.bean.bo.shop.ShipingFeeTemp;
-import com.eryi.bean.dto.CategoryDto;
-import com.eryi.bean.dto.ProductDto;
-import com.eryi.bean.dto.ResultBean;
-import com.eryi.bean.dto.ShipingFeeTempDto;
+import com.eryi.bean.bo.shop.Shop;
+import com.eryi.bean.dto.*;
 import com.eryi.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +28,7 @@ public class MerchantController extends BaseController {
      * 新增商品
      */
     @PostMapping("/addProduct")
-    public ResultBean addProduct(ProductDto productDto) {
+    public ResultBean addProduct(@RequestBody ProductDto productDto) {
         Product product = new Product();
         product.setName(productDto.getName());
         product.getCategory().setId(productDto.getCategoryId());
@@ -45,11 +44,12 @@ public class MerchantController extends BaseController {
      * @return
      */
     @PostMapping("/category")
-    public ResultBean addCategory(CategoryDto categoryDto) {
+    public ResultBean addCategory(@RequestBody CategoryDto categoryDto) {
         Category category = new Category();
         category.setId(UUID.randomUUID()+"");
         category.setName(categoryDto.getName());
         category.setPlatformDivision(categoryDto.getPlatformDivision());
+        category.setParentCategory(new Category());
         category.getParentCategory().setId(categoryDto.getParentId());
         return success(merchantService.addCategory(category));
     }
@@ -66,12 +66,41 @@ public class MerchantController extends BaseController {
 
     /**
      * 编辑售卖信息
-     *
      * @return
      */
     @PostMapping("/editOnSale")
-    public ResultBean editOnSale() {
-        return null;
+    public ResultBean editOnSale(@RequestBody OnsaleDto onsaleDto) {
+        OnSale onSale=new OnSale();
+        onSale.setId(UUID.randomUUID().toString());
+        onSale.setSalePrice(onsaleDto.getSalePrice());
+        onSale.setAmount(onsaleDto.getAmount());
+        onSale.setStartTime(onSale.getStartTime());
+        onSale.setEndTime(onSale.getEndTime());
+        onSale.setListingStatus(onsaleDto.getListingStatus());
+        onSale.setOrderNum(onSale.getOrderNum());
+        onSale.setProduct(new Product());
+        onSale.getProduct().setId(onsaleDto.getProductId());
+        return success(merchantService.editOnSale(onSale));
+    }
+
+    /**
+     * 新增售卖信息
+     * @return
+     */
+    @PostMapping("/addOnSale")
+    public ResultBean addOnSale(@RequestBody OnsaleDto onsaleDto) {
+        OnSale onSale=new OnSale();
+        onSale.setId(UUID.randomUUID().toString());
+        onSale.setSalePrice(onsaleDto.getSalePrice());
+        onSale.setPrice(onsaleDto.getPrice());
+        onSale.setAmount(onsaleDto.getAmount());
+        onSale.setStartTime(onsaleDto.getStartTime());
+        onSale.setEndTime(onsaleDto.getEndTime());
+        onSale.setListingStatus(onsaleDto.getListingStatus());
+        onSale.setOrderNum(onsaleDto.getOrderNum());
+        onSale.setProduct(new Product());
+        onSale.getProduct().setId(onsaleDto.getProductId());
+        return success(merchantService.addOnSale(onSale));
     }
 
     /**
@@ -82,7 +111,13 @@ public class MerchantController extends BaseController {
         ShipingFeeTemp shipingFeeTemp = new ShipingFeeTemp();
         shipingFeeTemp.setId(UUID.randomUUID()+"");
         shipingFeeTemp.setName(shipingFeeTempDto.getName());
+        Shop shop = new Shop();
+        shop.setId(shipingFeeTempDto.getShopId());
+        shipingFeeTemp.setShop(shop);
         shipingFeeTemp.setRegionTemplateList(shipingFeeTempDto.getRegionTemplateList());
+        shipingFeeTemp.getRegionTemplateList().forEach(regionTemplate -> {
+            regionTemplate.setShipingFeeTempId(shipingFeeTemp.getId());
+        });
         return success(merchantService.addShipingFeeTemp(shipingFeeTemp));
     }
 

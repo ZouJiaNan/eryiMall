@@ -3,12 +3,5 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.OrderMapper">
-    <!-- ResultMap 定义 -->
-    <resultMap id="OrderResultMap" type="com.eryi.bean.bo.pay.order.Order">
-        <id property="id" column="id" />
-        <result property="orderNum" column="order_num" />
-        <result property="state" column="state" />
-        <result property="create_time" column="create_time" />
-        <result property="update_time" column="update_time" />
-    </resultMap>
+
 </mapper>

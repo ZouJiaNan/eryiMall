@@ -19,6 +19,10 @@ public class Category {
      */
     private String name;
     /**
+     * 父分类
+     */
+    private String parentId;
+    /**
      * 排序编码
      */
     private int level;
@@ -30,8 +34,4 @@ public class Category {
      * 平台分成比列 %
      */
     private BigDecimal platformDivision;
-
-    public Category(){
-        parentCategory=new Category();
-    }
 }
