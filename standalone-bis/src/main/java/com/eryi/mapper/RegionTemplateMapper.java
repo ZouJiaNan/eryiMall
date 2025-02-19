@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface RegionTemplateMapper {
-    int insertRegionTemplate(List<RegionTemplatePo> regionTemplateList);
+    int addRegionTemplate(List<RegionTemplatePo> regionTemplateList);
 }

@@ -38,13 +38,13 @@
         <collection property="regionTemplateList" ofType="com.eryi.bean.bo.shop.RegionTemplate" resultMap="RegionTemplateResultMap"/>
     </resultMap>
     <!--分类-->
-    <resultMap id="categoryResultMap" type="com.eryi.bean.bo.product.Category">
+    <resultMap id="CategoryResultMap" type="com.eryi.bean.bo.product.Category">
         <id property="id" column="id" />
         <result property="name" column="name" />
         <result property="parentId" column="parent_id" />
         <result property="level" column="level" />
         <result property="platformDivision" column="platform_division" />
-        <association property="parentCategory" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
+        <!--association property="parentCategory" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/-->
     </resultMap>
     <!--商品-->
     <resultMap id="ProductResultMap" type="com.eryi.bean.bo.product.Product">
@@ -59,7 +59,7 @@
         <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
     </resultMap>
     <!--销售信息-->
-    <resultMap id="onsaleResultMap" type="com.eryi.bean.bo.product.OnSale">
+    <resultMap id="OnSaleResultMap" type="com.eryi.bean.bo.product.OnSale">
         <result property="id" column="id"/>
         <result property="orderNum" column="order_num"/>
         <result property="price" column="price"/>

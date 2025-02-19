@@ -4,11 +4,16 @@ import com.eryi.bean.bo.customer.Car;
 import com.eryi.bean.bo.customer.CarItem;
 import com.eryi.bean.bo.pay.order.Order;
 import com.eryi.bean.bo.pay.order.OrderItem;
+import com.eryi.bean.bo.product.OnSale;
+import com.eryi.bean.bo.product.Product;
 import com.eryi.dao.CarDao;
+import com.eryi.dao.OnSaleDao;
 import com.eryi.dao.ProductDao;
 import com.eryi.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -17,6 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     ProductDao productDao;
+
+    @Autowired
+    OnSaleDao onSaleDao;
 
     /**
      * 添加购物车
@@ -47,5 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
         order.getOrderItems().add(orderItem);
         //交给MQ
         return 0;
+    }
+
+    @Override
+    public List<OnSale> getOnSaleList(String userId) {
+        return onSaleDao.getOnSaleList(userId);
     }
 }

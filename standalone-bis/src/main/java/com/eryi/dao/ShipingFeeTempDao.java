@@ -54,6 +54,10 @@ public class ShipingFeeTempDao {
             regionTemplatePo.setNextUnit(regionTemplate.getNextUnit());
             list.add(regionTemplatePo);
         });
-        return regionTemplateMapper.insertRegionTemplate(list);
+        return regionTemplateMapper.addRegionTemplate(list);
+    }
+
+    public List<ShipingFeeTemp> findAll(String userId){
+        return shipingFeeTempMapper.findAll();
     }
 }

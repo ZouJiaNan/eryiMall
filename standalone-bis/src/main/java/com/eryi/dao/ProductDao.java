@@ -6,14 +6,13 @@ import com.eryi.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public class ProductDao {
     @Autowired
     ProductMapper productMapper;
-
-
     public int addProduct(Product product){
         ProductPo productPo = new ProductPo();
         productPo.setId(UUID.randomUUID().toString());
@@ -27,5 +26,9 @@ public class ProductDao {
 
     public Product getProductById(String id){
         return productMapper.getProductById(id);
+    }
+
+    public List<Product> findAll(){
+        return productMapper.findAll();
     }
 }

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.RegionTemplateMapper">
-    <insert id="insertRegionTemplate" parameterType="com.eryi.bean.po.RegionTemplatePo">
+    <insert id="addRegionTemplate" parameterType="com.eryi.bean.po.RegionTemplatePo">
         INSERT INTO region_template (
         fee_temp_id,area_code, area_name, first_unit, first_unit_price, next_unit, next_unit_price, free_condition
         )

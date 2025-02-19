@@ -40,12 +40,12 @@
     </update>
 
     <!-- 根据ID查询 -->
-    <select id="selectById" parameterType="Long" resultMap="ProductResultMap">
+    <select id="selectById" parameterType="Long" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
         SELECT * FROM product WHERE id = #{id}
     </select>
 
     <!-- 查询所有 -->
-    <select id="findAll" resultMap="ProductResultMap">
-        SELECT * FROM product
+    <select id="findAll" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
+        SELECT * FROM product join category	on product.category_id=category.id
     </select>
 </mapper>

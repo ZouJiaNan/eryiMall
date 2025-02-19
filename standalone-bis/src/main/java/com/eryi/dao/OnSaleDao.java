@@ -6,6 +6,8 @@ import com.eryi.mapper.OnSaleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class OnSaleDao {
     @Autowired
@@ -18,6 +20,9 @@ public class OnSaleDao {
         return onSaleMapper.editOnSale(BoToPo(onSale));
     }
 
+    public List<OnSale> getOnSaleList(String userId){
+        return onSaleMapper.getOnSaleList();
+    }
     private OnSalePo BoToPo(OnSale onSale){
         OnSalePo onSalePo=new OnSalePo();
         onSalePo.setId(onSale.getId());

@@ -12,31 +12,14 @@
                    #{id},#{shopId}, #{name}, #{type}
                )
     </insert>
-
-    <delete id="deleteById" parameterType="String">
-        DELETE FROM shiping_fee_temp WHERE id = #{id}
-    </delete>
-
-    <!-- 动态更新 -->
-    <update id="updateById" parameterType="com.eryi.bean.po.ShipingFeeTempPo">
-        UPDATE shiping_fee_temp
-        <set>
-            <if test="shopId != null">shop_id = #{shopId},</if>
-            <if test="name != null">name = #{name},</if>
-            <if test="regionIds != null">region_ids = #{regionIds},</if>
-            <if test="type != null">type = #{type}</if>
-        </set>
-        WHERE id = #{id}
-    </update>
-
     <!-- 根据ID查询 -->
-    <select id="findById" parameterType="String" resultMap="ShipingFeeTempResultMap">
-        SELECT * FROM shiping_fee_temp WHERE id = #{id}
+    <select id="findById" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.ShipingFeeTempResultMap">
+        SELECT * FROM shiping_fee_temp join region_template on region_template.fee_temp_id=shiping_fee_temp.id and shiping_fee_temp.id = #{id}
     </select>
 
     <!-- 查询所有 -->
-    <select id="findAll" resultMap="ShipingFeeTempResultMap">
-        SELECT * FROM shiping_fee_temp
+    <select id="findAll" resultMap="com.eryi.mapper.CommonResultMaps.ShipingFeeTempResultMap">
+        SELECT * FROM shiping_fee_temp join region_template on region_template.fee_temp_id=shiping_fee_temp.id
     </select>
 
 </mapper>

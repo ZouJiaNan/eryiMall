@@ -30,12 +30,12 @@
     </update>
 
     <!-- 根据ID查询 -->
-    <select id="selectById" parameterType="String" resultMap="CategoryResultMap">
+    <select id="selectById" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CategoryResultMap">
         SELECT * FROM category WHERE id = #{id}
     </select>
 
     <!-- 查询所有 -->
-    <select id="findAll" resultMap="CategoryResultMap">
+    <select id="findAll" resultMap="com.eryi.mapper.CommonResultMaps.CategoryResultMap">
         SELECT * FROM category
     </select>
 

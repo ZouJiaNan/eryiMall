@@ -7,12 +7,14 @@ import com.eryi.bean.bo.shop.ShipingFeeTemp;
 import com.eryi.bean.bo.shop.Shop;
 import com.eryi.bean.dto.*;
 import com.eryi.service.MerchantService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -56,7 +58,6 @@ public class MerchantController extends BaseController {
 
     /**
      * 修改商品上架/下架 状态
-     *
      * @return
      */
     @PostMapping("/changeListStatus")
@@ -119,6 +120,53 @@ public class MerchantController extends BaseController {
             regionTemplate.setShipingFeeTempId(shipingFeeTemp.getId());
         });
         return success(merchantService.addShipingFeeTemp(shipingFeeTemp));
+    }
+
+    /**
+     * 获取运费模板列表
+     * @param userId
+     * @return
+     */
+    @GetMapping("/shipFeeTemp")
+    public ResultBean getShipingFeeTempList(String userId) {
+        return success(merchantService.getShipingFeeTempList(userId));
+    }
+
+    /**
+     * 获取商品列表
+     * @param userId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/getProductList")
+    public ResultBean getProductList(String userId,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Product> productList = merchantService.getProductList(userId);
+        PageInfo<Product> pageInfo = new PageInfo<>(productList);
+        return success(pageInfo);
+    }
+
+    /**
+     * 新增销售信息
+     * @param userId
+     * @param onsaleDto
+     * @return
+     */
+    @PostMapping("/onSale")
+    public ResultBean addOnSale(String  userId,OnsaleDto onsaleDto) {
+        OnSale onSale=new OnSale();
+        onSale.setId(UUID.randomUUID().toString());
+        onSale.setSalePrice(onsaleDto.getSalePrice());
+        onSale.setPrice(onsaleDto.getPrice());
+        onSale.setAmount(onsaleDto.getAmount());
+        onSale.setStartTime(onsaleDto.getStartTime());
+        onSale.setEndTime(onsaleDto.getEndTime());
+        onSale.setListingStatus(onsaleDto.getListingStatus());
+        onSale.setOrderNum(onsaleDto.getOrderNum());
+        onSale.setProduct(new Product());
+        onSale.getProduct().setId(onsaleDto.getProductId());
+        return success(merchantService.addOnSale(onSale));
     }
 
     /**

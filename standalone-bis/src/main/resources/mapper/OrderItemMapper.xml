@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.CarItemMapper">
-    <insert id="insert" parameterType="com.eryi.bean.po.CarItemPo" useGeneratedKeys="true" keyProperty="carId">
+    <insert id="insert" parameterType="com.eryi.bean.po.CarItemPo">
         INSERT INTO car_item (
             on_sale_id
         )
@@ -24,12 +24,12 @@
         WHERE car_id = #{carId}
     </update>
 
-    <select id="selectById" parameterType="String" resultMap="CarItemResultMap">
-        SELECT * FROM car_item WHERE car_id = #{carId}
-    </select>
+<!--    <select id="selectById" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarItemResultMap">-->
+<!--        SELECT * FROM car_item WHERE car_id = #{carId}-->
+<!--    </select>-->
 
-    <select id="findAll" resultMap="CarItemResultMap">
-        SELECT * FROM car_item
-    </select>
+<!--    <select id="findAll" resultMap="CarItemResultMap">-->
+<!--        SELECT * FROM car_item-->
+<!--    </select>-->
 
 </mapper>

@@ -64,4 +64,14 @@ public class MerchantServiceImpl implements MerchantService {
     public int addOnSale(OnSale onSale) {
         return onSaleDao.addOnSale(onSale);
     }
+
+    @Override
+    public List<ShipingFeeTemp> getShipingFeeTempList(String userId) {
+        return shipingFeeTempDao.findAll(userId);
+    }
+
+    @Override
+    public List<Product> getProductList(String userId) {
+        return productDao.findAll();
+    }
 }

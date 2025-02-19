@@ -16,7 +16,7 @@
                )
     </insert>
 
-    <select id="findByUserId" parameterType="String" resultMap="CarResultMap">
+    <select id="findByUserId" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarResultMap">
         SELECT
             id,
             product_id,

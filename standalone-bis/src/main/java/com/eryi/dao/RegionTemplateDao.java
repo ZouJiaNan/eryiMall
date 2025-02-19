@@ -18,6 +18,6 @@ public class RegionTemplateDao {
         regionTemplateList.forEach(regionTemplate -> {
 
         });
-        return  regionTemplateMapper.insertRegionTemplate(regionTemplatePoList);
+        return  regionTemplateMapper.addRegionTemplate(regionTemplatePoList);
     }
 }

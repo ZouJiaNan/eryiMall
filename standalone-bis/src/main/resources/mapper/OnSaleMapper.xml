@@ -45,4 +45,8 @@
             id = #{id}
     </update>
 
+    <select id="getOnSaleList" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
+        SELECT * from onSale join product on onSale.product_id=product.id
+    </select>
+
 </mapper>
