@@ -12,6 +12,7 @@ import com.eryi.dao.ProductDao;
 import com.eryi.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,11 +34,12 @@ public class CustomerServiceImpl implements CustomerService {
      * @return
      */
     @Override
+    @Transactional
     public int addCarItem(String userId,String onSaleId) {
         //获取满血模型
         Car car = carDao.findByUserId(userId);
         //添加购物车
-        return car.addCarItem(car.getId(),userId,onSaleId);
+        return car.addCarItem(car.getId(),onSaleId);
     }
 
     /**

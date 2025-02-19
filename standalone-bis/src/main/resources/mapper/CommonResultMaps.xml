@@ -74,6 +74,6 @@
     <!--购物车-->
     <resultMap id="CarResultMap" type="com.eryi.bean.bo.customer.Car">
         <id property="id" column="id" />
-        <association property="product" javaType="com.eryi.bean.bo.common.User" resultMap="UserResultMap"/>
+        <association property="user" javaType="com.eryi.bean.bo.common.User" resultMap="UserResultMap"/>
     </resultMap>
 </mapper>

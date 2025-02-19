@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eryi.mapper.CarItemMapper">
+    <insert id="addCarItem" parameterType="com.eryi.bean.po.CarItemPo">
+        INSERT INTO car_item (car_id, on_sale_id)
+        VALUES (#{carId}, #{onSaleId})
+    </insert>
+
+    <select id="findByUserId" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarResultMap">
+        SELECT
+            id,
+            product_id,
+            user_id
+        FROM
+            car
+        WHERE
+            user_id = #{userId}
+    </select>
+</mapper>

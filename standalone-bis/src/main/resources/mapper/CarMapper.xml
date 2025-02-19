@@ -3,23 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.CarMapper">
-    <insert id="insertCar" parameterType="com.eryi.bean.po.CarPo">
+    <insert id="addCar" parameterType="com.eryi.bean.po.CarPo">
         INSERT INTO car (
             id,
-            product_id,
             user_id
         )
         VALUES (
                    #{id},
-                   #{productId},
                    #{userId}
                )
     </insert>
 
-    <select id="findByUserId" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarResultMap">
+    <select id="getCarByUserId" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarResultMap">
         SELECT
             id,
-            product_id,
             user_id
         FROM
             car

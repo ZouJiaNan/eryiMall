@@ -48,10 +48,9 @@ public class CustomerController extends BaseController{
         return success(pageInfo);
     }
 
-    @PostMapping
-    public ResultBean addCarItem(String productId,String userId) {
-        //Ìí¼Ó¹ºÎï³µ
-        return success(customerService.addCarItem(productId,userId));
+    @PostMapping("/carItem")
+    public ResultBean addCarItem(String onSaleId,String userId) {
+        return success(customerService.addCarItem(userId,onSaleId));
     }
 
 }
