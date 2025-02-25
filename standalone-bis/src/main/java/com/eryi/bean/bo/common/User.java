@@ -1,14 +1,16 @@
 package com.eryi.bean.bo.common;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Data
 @Setter
 @Getter
-public class User {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
     /**
      * 用户名
@@ -26,4 +28,8 @@ public class User {
      * 头像
      */
     private String picture;
+
+    public User(String id){
+        this.id = id;
+    }
 }

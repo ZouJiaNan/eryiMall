@@ -1,17 +1,15 @@
-package com.eryi.bean.bo.pay.order;
+package com.eryi.bean.po;
 
-import com.eryi.bean.bo.pay.PayTransection;
-import com.eryi.bean.bo.pay.RefundTransection;
-import com.eryi.bean.bo.product.OnSale;
 import lombok.*;
 
 import java.math.BigDecimal;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class OrderItem {
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderItemPo {
     private String id;
     /**
      * 订单id
@@ -20,7 +18,7 @@ public class OrderItem {
     /**
      * 商铺销售消息
      */
-    private OnSale onSale;
+    private String onSaleId;
     /**
      * 总价
      */
@@ -37,14 +35,9 @@ public class OrderItem {
     /**
      * 支付交易
      */
-    private PayTransection payTransection;
+    private String payTransectionId;
     /**
      * 退款交易
      */
-    private RefundTransection refundTransection;
-
-    /**
-     * 物流消息
-     */
-    private LogisticsNews logisticsNews;
+    private String refundTransectionId;
 }

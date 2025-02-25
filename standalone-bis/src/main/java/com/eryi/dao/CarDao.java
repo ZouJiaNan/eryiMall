@@ -35,7 +35,7 @@ public class CarDao {
             CarPo carPo = new CarPo(UUID.randomUUID().toString(),userId);
             carMapper.addCar(carPo);
             car = new Car();
-            car.setUser(new User());
+            car.setUser(new User(userId));
             car.setId(carPo.getId());
             car.getUser().setId(userId);
         }

@@ -47,4 +47,8 @@ public class OnSale {
      */
     private Product product;
     private BigDecimal salePrice;
+
+    public OnSale(String id){
+        this.id=id;
+    }
 }

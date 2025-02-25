@@ -8,9 +8,13 @@ import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
 import com.eryi.dao.CarDao;
 import com.eryi.dao.OnSaleDao;
+import com.eryi.dao.OrderDao;
 import com.eryi.dao.ProductDao;
 import com.eryi.service.CustomerService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +30,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     OnSaleDao onSaleDao;
+
+    @Autowired
+    OrderDao orderDao;
+
+    @Value("${my.topic.order.delayed}")
+    private String orderDelayedTopic;
+
+    @Value("${my.topic.order}")
+    private String orderTopic;
+
+    @Autowired
+    RocketMQTemplate rocketMQTemplate;
 
     /**
      * 添加购物车
@@ -44,19 +60,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     /**
      * 创建订单
-     * @param carItem
+     * @param order
      * @return
      */
     @Override
-    public int createOrder(CarItem carItem) {
-        //创建订单实体
-        //因为是还没有落库所以创建的是Bo，支付后落库时再转为Po
-        Order order = new Order();
-        OrderItem orderItem = new OrderItem();
-        orderItem.setOnSale(carItem.getOnSale());
-        order.getOrderItems().add(orderItem);
+    public int createOrder(Order order) {
         //交给MQ
-        return 0;
+        //延时队列
+        rocketMQTemplate.convertAndSend(orderDelayedTopic,order);
+        //写库队列
+        rocketMQTemplate.convertAndSend(orderTopic,order);
+        return 1;
+    }
+
+    /**
+     * 订单新增落库
+     * @param order
+     * @return
+     */
+    public int addOrder(Order order) {
+        orderDao.addOrder(order);
+        order=orderDao.findOrderById(order.getId());
+        for (OrderItem orderItem : order.getOrderItems()) {
+            order.addOrderItem(orderItem);
+        }
+        return 1;
     }
 
     @Override

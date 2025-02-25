@@ -16,7 +16,7 @@ public class Test {
     @org.junit.jupiter.api.Test
     public void testProducer() throws Exception {
         //创建消费者，创建的时候可以指定该消费者属于哪个消费者组
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        DefaultMQProducer producer = new DefaultMQProducer("my-producer-group");
         //指定name server的地址
         producer.setNamesrvAddr("192.168.31.10:9876");
         producer.setSendMsgTimeout(10000);
@@ -49,7 +49,7 @@ public class Test {
         // 设置 NameServer 地址
         consumer.setNamesrvAddr("192.168.31.10:9876");
         // 订阅主题和标签（* 表示订阅所有标签）
-        consumer.subscribe("TopicTest", "TagA");
+        consumer.subscribe("order","*");
 
         // 注册消息监听器
         consumer.registerMessageListener(new MessageListenerConcurrently() {

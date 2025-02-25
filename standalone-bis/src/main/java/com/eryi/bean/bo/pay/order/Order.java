@@ -4,8 +4,11 @@ import com.eryi.bean.bo.pay.RefundTransection;
 import com.eryi.bean.bo.common.User;
 import com.eryi.bean.bo.pay.PayTransection;
 import com.eryi.bean.bo.shop.Shop;
+import com.eryi.bean.dto.OrderItemDto;
+import com.eryi.dao.OrderDao;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,7 +20,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Order {
+public class Order implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private OrderDao orderDao;
+    /**
+     * 主键
+     */
+    private String id;
     /**
      * 用户
      */
@@ -31,29 +41,32 @@ public class Order {
      */
     private String address;
     /**
-     * 支付交易
-     */
-    private PayTransection payTransection;
-    /**
-     * 退款交易
-     */
-    private RefundTransection refundTransection;
-    /**
      * 订单项
      */
     private List<OrderItem> orderItems;
     /**
      * 状态
+     * 1.未支付 2.已支付 3.已发货 4.已收货 5.已退款 6.已取消
      */
     private int status;
 
     /**
-     * 物流消息
+     * 支付渠道
+     * 1.支付宝 2.微信 3.其他
      */
-    private LogisticsNews logisticsNews;
+    private int channel;
 
     /**
-     * 运费
+     * 总价格
      */
-    private BigDecimal shipingFee;
+    private BigDecimal totalPrice;
+
+    /**
+     * 总运费
+     */
+    private BigDecimal totalShipingFee;
+
+    public int addOrderItem(OrderItem orderItem) {
+        return orderDao.addOrderItem(orderItem);
+    }
 }

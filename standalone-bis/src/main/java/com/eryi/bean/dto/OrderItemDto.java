@@ -19,7 +19,7 @@ public class OrderItemDto {
     /**
      * 商铺销售消息
      */
-    private OnSale onSale;
+    private String onSaleId;
     /**
      * 总价
      */
