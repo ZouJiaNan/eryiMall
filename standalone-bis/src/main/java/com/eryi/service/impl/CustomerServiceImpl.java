@@ -1,24 +1,27 @@
 package com.eryi.service.impl;
 
 import com.eryi.bean.bo.customer.Car;
-import com.eryi.bean.bo.customer.CarItem;
 import com.eryi.bean.bo.pay.order.Order;
 import com.eryi.bean.bo.pay.order.OrderItem;
 import com.eryi.bean.bo.product.OnSale;
-import com.eryi.bean.bo.product.Product;
 import com.eryi.dao.CarDao;
 import com.eryi.dao.OnSaleDao;
 import com.eryi.dao.OrderDao;
 import com.eryi.dao.ProductDao;
 import com.eryi.service.CustomerService;
+import org.apache.rocketmq.client.producer.SendCallback;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.MessageConst;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -65,12 +68,52 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public int createOrder(Order order) {
-        //交给MQ
-        //延时队列
-        rocketMQTemplate.convertAndSend(orderDelayedTopic,order);
-        //写库队列
-        rocketMQTemplate.convertAndSend(orderTopic,order);
+        CompletableFuture<Object> future1 = new CompletableFuture<>();
+        CompletableFuture<Void> future2 = new CompletableFuture<>();
+        //创建半小时延时消息
+        createOrderdelayed(future1,order);
+        //编排线程,创建订单，让写库线程严格在创建延时消息的线程执行完成后再执行
+        future1.thenCompose(delayResult-> createOrder(future2,order));
         return 1;
+    }
+
+    private CompletableFuture createOrder(CompletableFuture future,Order order){
+        //写流量削峰队列
+        Message<Order> message = MessageBuilder.withPayload(order)
+                .build();
+        rocketMQTemplate.asyncSend(orderTopic, message, new SendCallback() {
+            @Override
+            public void onSuccess(SendResult sendResult) {
+                System.out.println("异步发送成功：" + sendResult.getMsgId());
+                future.complete(null);
+            }
+            @Override
+            public void onException(Throwable throwable) {
+                System.out.println("异步发送失败：" + throwable.getMessage());
+                future.completeExceptionally(throwable);
+            }
+        },3000);
+        return future;
+    }
+
+    private CompletableFuture createOrderdelayed(CompletableFuture future,Order order){
+        //写延时队列
+        Message<Order> delayedMessage = MessageBuilder.withPayload(order)
+                .setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL, "16")
+                .build();
+        rocketMQTemplate.asyncSend(orderDelayedTopic, delayedMessage, new SendCallback() {
+            @Override
+            public void onSuccess(SendResult sendResult) {
+                System.out.println("异步发送成功：" + sendResult.getMsgId());
+                future.complete(null);
+            }
+            @Override
+            public void onException(Throwable throwable) {
+                System.out.println("异步发送失败：" + throwable.getMessage());
+                future.completeExceptionally(throwable);
+            }
+        },3000);
+        return future;
     }
 
     /**
