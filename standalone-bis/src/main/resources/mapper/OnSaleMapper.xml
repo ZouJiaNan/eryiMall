@@ -49,4 +49,8 @@
         SELECT * from onSale join product on onSale.product_id=product.id
     </select>
 
+    <select id="findById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
+        SELECT * from onSale where id = #{id}
+    </select>
+
 </mapper>

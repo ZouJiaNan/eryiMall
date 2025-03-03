@@ -8,6 +8,7 @@ import com.eryi.bean.bo.pay.order.OrderItem;
 import com.eryi.bean.bo.shop.Shop;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 

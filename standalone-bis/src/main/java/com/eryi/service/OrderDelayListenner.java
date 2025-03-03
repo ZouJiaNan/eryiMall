@@ -1,6 +1,7 @@
 package com.eryi.service;
 
 import com.eryi.bean.bo.pay.order.Order;
+import com.eryi.dao.OnSaleDao;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +9,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RocketMQMessageListener(
-        topic = "${my.topic.order}",
+        topic = "${my.topic.order.delayed}",
         consumerGroup = "${rocketmq.producer.group}",
         selectorExpression = "*", // 消费所有 Tag
         consumeThreadNumber = 4   // 消费线程数
 )
-public class MQOrderListenner implements RocketMQListener<Order> {
+public class OrderDelayListenner implements RocketMQListener<Order> {
     @Autowired
-    CustomerService  customerService;
+    OnSaleDao onSaleDao;
     @Override
     public void onMessage(Order order) {
-        //订单落库
-        //customerService.addOrder(order);
-        System.out.println("订单落库："+order.toString());
+        System.out.println("延迟消息："+order.toString());
+        //1.检查订单状态
+        //2.如果订单状态是未支付，则取消订单
+        //3.释放库存
+        //OnSale onSale = onSaleDao.findById(order.getOrderItems().get(0).getOnSale().getId());
+        //onSaleDao.releaseStock(onSale,order.getOrderItems().get(0).getCount());
     }
 }

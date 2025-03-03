@@ -13,6 +13,13 @@ public class OnSaleDao {
     @Autowired
     OnSaleMapper onSaleMapper;
 
+    private OnSale build(OnSale onSale){
+        onSale.setOnSaleDao(this);
+        return onSale;
+    }
+    public OnSale findById(String onSaleId){
+        return build(onSaleMapper.findById(onSaleId));
+    }
     public int addOnSale(OnSale onSale){
         return onSaleMapper.addOnSale(BoToPo(onSale));
     }
@@ -22,6 +29,16 @@ public class OnSaleDao {
 
     public List<OnSale> getOnSaleList(String userId){
         return onSaleMapper.getOnSaleList();
+    }
+
+    public void lockStock(OnSale onSale,int count){
+        onSale.setRemain(onSale.getRemain()-count);
+        onSaleMapper.editOnSale(BoToPo(onSale));
+    }
+
+    public void releaseStock(OnSale onSale,int count){
+        onSale.setRemain(onSale.getRemain()-count);
+        onSaleMapper.editOnSale(BoToPo(onSale));
     }
     private OnSalePo BoToPo(OnSale onSale){
         OnSalePo onSalePo=new OnSalePo();

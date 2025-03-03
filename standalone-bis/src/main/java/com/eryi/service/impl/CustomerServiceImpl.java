@@ -67,7 +67,12 @@ public class CustomerServiceImpl implements CustomerService {
      * @return
      */
     @Override
+    @Transactional
     public int createOrder(Order order) {
+        //锁定库存
+        OnSale onSale = onSaleDao.findById(order.getOrderItems().get(0).getOnSale().getId());
+        onSale.lockStock(order);
+
         CompletableFuture<Object> future1 = new CompletableFuture<>();
         CompletableFuture<Void> future2 = new CompletableFuture<>();
         //创建半小时延时消息
@@ -84,15 +89,15 @@ public class CustomerServiceImpl implements CustomerService {
         rocketMQTemplate.asyncSend(orderTopic, message, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("异步发送成功：" + sendResult.getMsgId());
+                System.out.println("写流量削峰队列成功：" + sendResult.getMsgId());
                 future.complete(null);
             }
             @Override
             public void onException(Throwable throwable) {
-                System.out.println("异步发送失败：" + throwable.getMessage());
+                System.out.println("写流量削峰队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
-        },3000);
+        });
         return future;
     }
 
@@ -104,15 +109,15 @@ public class CustomerServiceImpl implements CustomerService {
         rocketMQTemplate.asyncSend(orderDelayedTopic, delayedMessage, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("异步发送成功：" + sendResult.getMsgId());
+                System.out.println("写延迟队列成功：" + sendResult.getMsgId());
                 future.complete(null);
             }
             @Override
             public void onException(Throwable throwable) {
-                System.out.println("异步发送失败：" + throwable.getMessage());
+                System.out.println("写延迟队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
-        },3000);
+        });
         return future;
     }
 
