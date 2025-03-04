@@ -27,7 +27,7 @@ public class OrderItemDto {
     /**
      * 数量
      */
-    private BigDecimal count;
+    private int count;
     /**
      * 运费
      */

@@ -36,12 +36,20 @@ public class CustomerController extends BaseController{
         Order order = new Order();
         order.setId(UUID.randomUUID().toString());
         order.setUser(new User(orderDto.getUserId()));
+        order.setAddress(orderDto.getAddress());
+        order.setTotalShipingFee(orderDto.getShipingFee());
+        order.setStatus(1);
         orderDto.getOrderItems().forEach(orderItemDto -> {
             OrderItem orderItem = new OrderItem();
+            orderItem.setId(UUID.randomUUID().toString());
             orderItem.setOrderId(order.getId());
             orderItem.setOnSale(new OnSale(orderItemDto.getOnSaleId()));
-            orderItem.setCount(orderDto.getTotalCount());
-            order.setOrderItems(new ArrayList<>());
+            orderItem.setCount(orderItemDto.getCount());
+            orderItem.setTotalPrice(orderItemDto.getTotalPrice());
+            orderItem.setShipingFee(orderItemDto.getShipingFee());
+            if(order.getOrderItems()==null) {
+                order.setOrderItems(new ArrayList<>());
+            }
             order.getOrderItems().add(orderItem);
         });
         return success(customerService.createOrder(order));

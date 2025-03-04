@@ -5,11 +5,11 @@
 <mapper namespace="com.eryi.mapper.CommonResultMaps">
     <!--用户-->
     <resultMap id="UserResultMap" type="com.eryi.bean.bo.common.User">
-        <result property="id" column="id"/>
-        <result property="userName" column="user_name"/>
-        <result property="password" column="pass_word"/>
-        <result property="nickName" column="nick_name"/>
-        <result property="picture" column="picture"/>
+        <result property="id" column="user_id"/>
+        <result property="userName" column="user_user_name"/>
+        <result property="password" column="user_pass_word"/>
+        <result property="nickName" column="user_nick_name"/>
+        <result property="picture" column="user_picture"/>
     </resultMap>
     <!--商店-->
     <resultMap id="ShopResultMap" type="com.eryi.bean.bo.shop.Shop">
@@ -76,4 +76,24 @@
         <id property="id" column="id" />
         <association property="user" javaType="com.eryi.bean.bo.common.User" resultMap="UserResultMap"/>
     </resultMap>
+    <!--订单项-->
+    <resultMap id="CarItemResultMap" type="com.eryi.bean.bo.pay.order.OrderItem">
+        <id property="id" column="id"/>
+        <result property="orderId" column="orderItem_order_Id"/>
+        <result property="totalPrice" column="orderItem_total_price"/>
+        <result property="count" column="orderItem_count"/>
+        <result property="shipingFee" column="orderItem_shipingFee"/>
+        <association property="onSale" javaType="com.eryi.bean.bo.product.OnSale" resultMap="OnSaleResultMap"/>
+    </resultMap>
+    <resultMap id="OrderResultMap" type="com.eryi.bean.bo.pay.order.Order">
+        <id property="id" column="order_order_id"/>
+        <result property="shopId" column="order_shop_id"/>
+        <result property="address" column="order_address"/>
+        <result property="status" column="order_status"/>
+        <result property="totalPrice" column="order_total_price"/>
+        <result property="totalShipingFee" column="order_shiping_fee"/>
+        <!--association property="user" javaType="com.eryi.bean.bo.common.User" resultMap="UserResultMap"/-->
+        <!--collection property="orderItems" ofType="com.eryi.bean.bo.pay.order.OrderItem" resultMap="CarItemResultMap"/-->
+    </resultMap>
+
 </mapper>

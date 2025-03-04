@@ -48,11 +48,6 @@ public class OrderPo {
     private int status;
 
     /**
-     * 物流消息
-     */
-    private LogisticsNews logisticsNews;
-
-    /**
      * 运费
      */
     private BigDecimal shipingFee;

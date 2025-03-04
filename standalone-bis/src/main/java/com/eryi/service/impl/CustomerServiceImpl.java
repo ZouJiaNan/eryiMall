@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
         rocketMQTemplate.asyncSend(orderTopic, message, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("写流量削峰队列成功：" + sendResult.getMsgId());
+                System.out.println("写流量削峰队列成功：" + sendResult.toString());
                 future.complete(null);
             }
             @Override
@@ -103,13 +103,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CompletableFuture createOrderdelayed(CompletableFuture future,Order order){
         //写延时队列
-        Message<Order> delayedMessage = MessageBuilder.withPayload(order)
-                .setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL, "16")
-                .build();
+        Message<Order> delayedMessage = MessageBuilder.withPayload(order).build();
         rocketMQTemplate.asyncSend(orderDelayedTopic, delayedMessage, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("写延迟队列成功：" + sendResult.getMsgId());
+                System.out.println("写延迟队列成功：" + sendResult.toString());
                 future.complete(null);
             }
             @Override
@@ -117,7 +115,7 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println("写延迟队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
-        });
+        },3000,9);
         return future;
     }
 
@@ -126,11 +124,13 @@ public class CustomerServiceImpl implements CustomerService {
      * @param order
      * @return
      */
+    @Transactional
     public int addOrder(Order order) {
         orderDao.addOrder(order);
-        order=orderDao.findOrderById(order.getId());
+        Order findOrder=orderDao.findOrderById(order.getId());
         for (OrderItem orderItem : order.getOrderItems()) {
-            order.addOrderItem(orderItem);
+            orderItem.setOrderId(order.getId());
+            findOrder.addOrderItem(orderItem);
         }
         return 1;
     }

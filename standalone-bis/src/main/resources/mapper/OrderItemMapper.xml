@@ -2,34 +2,26 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eryi.mapper.CarItemMapper">
-    <insert id="insert" parameterType="com.eryi.bean.po.CarItemPo">
-        INSERT INTO car_item (
-            on_sale_id
-        )
-        VALUES (
-                   #{onSaleId}
-               )
+<mapper namespace="com.eryi.mapper.OrderItemMapper">
+    <insert id="addOrderItem" parameterType="com.eryi.bean.po.OrderItemPo">
+        INSERT INTO `order_item` (
+            id,
+            order_id,
+            on_sale_id,
+            total_price,
+            count,
+            shiping_fee,
+            pay_transection_id,
+            refund_transection_id
+        ) VALUES (
+                     #{id},
+                     #{orderId},
+                     #{onSaleId},
+                     #{totalPrice},
+                     #{count},
+                     #{shipingFee},
+                     #{payTransectionId},
+                     #{refundTransectionId}
+                 )
     </insert>
-
-    <delete id="deleteById" parameterType="String">
-        DELETE FROM car_item WHERE car_id = #{carId}
-    </delete>
-
-    <update id="updateById" parameterType="com.eryi.bean.po.CarItemPo">
-        UPDATE car_item
-        <set>
-            <if test="onSaleId != null">on_sale_id = #{onSaleId}</if>
-        </set>
-        WHERE car_id = #{carId}
-    </update>
-
-<!--    <select id="selectById" parameterType="String" resultMap="com.eryi.mapper.CommonResultMaps.CarItemResultMap">-->
-<!--        SELECT * FROM car_item WHERE car_id = #{carId}-->
-<!--    </select>-->
-
-<!--    <select id="findAll" resultMap="CarItemResultMap">-->
-<!--        SELECT * FROM car_item-->
-<!--    </select>-->
-
 </mapper>

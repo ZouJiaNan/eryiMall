@@ -47,8 +47,10 @@ public class OrderDao {
     private OrderPo OrderBoToPo(Order order){
         OrderPo orderPo = new OrderPo();
         orderPo.setId(order.getId());
-        orderPo.setShopId(order.getShop().getId());
+        orderPo.setUserId(order.getUser().getId());
         orderPo.setAddress(order.getAddress());
+        orderPo.setShipingFee(order.getTotalShipingFee());
+        orderPo.setStatus(order.getStatus());
         return orderPo;
     }
 }

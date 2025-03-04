@@ -3,5 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eryi.mapper.OrderMapper">
+    <insert id="addOrder" parameterType="com.eryi.bean.po.OrderPo">
+        INSERT INTO `order` (
+            id,
+            user_id,
+            shop_id,
+            address,
+            pay_transection_id,
+            refund_transection_id,
+            status,
+            shiping_fee
+        ) VALUES (
+                     #{id},
+                     #{userId},
+                     #{shopId},
+                     #{address},
+                     #{payTransectionId},
+                     #{refundTransectionId},
+                     #{status},
+                     #{shipingFee}
+                 )
+    </insert>
 
+    <select id="findOrderByUserId" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OrderResultMap">
+        select * from order where id =#{userId}
+    </select>
+
+    <select id="findOrderById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OrderResultMap">
+        select
+            o.id as order_order_id,
+            o.shop_id as order_shop_id,
+            o.address as order_address,
+            o.status as order_status,
+            o.shiping_fee as order_shiping_fee
+        from
+            `order` o
+        where
+            o.id=#{id}
+    </select>
 </mapper>

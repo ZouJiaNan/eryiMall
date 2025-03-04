@@ -6,6 +6,8 @@ import com.eryi.bean.bo.pay.PayTransection;
 import com.eryi.bean.bo.shop.Shop;
 import com.eryi.bean.dto.OrderItemDto;
 import com.eryi.dao.OrderDao;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -65,6 +67,11 @@ public class Order implements Serializable {
      * ×ÜÔË·Ñ
      */
     private BigDecimal totalShipingFee;
+
+    @JsonCreator
+    public Order(@JsonProperty("id") String id) {
+        this.id = id;
+    }
 
     public int addOrderItem(OrderItem orderItem) {
         return orderDao.addOrderItem(orderItem);
