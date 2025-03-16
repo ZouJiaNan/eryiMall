@@ -1,6 +1,7 @@
 package com.eryi.bean.dto;
 
 import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.bo.product.SKU;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -52,4 +53,8 @@ public class OnsaleDto {
      * €º€
      */
     private BigDecimal salePrice;
+    /**
+     * sku
+     */
+    private String skuCode;
 }

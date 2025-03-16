@@ -13,4 +13,6 @@ public interface OnSaleMapper {
     int addOnSale(OnSalePo onSalePo);
     int editOnSale(OnSalePo onSalePo);
     List<OnSale> getOnSaleList();
+
+    List<OnSale> getProductsByCate(String categoryId);
 }

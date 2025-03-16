@@ -39,4 +39,19 @@
         SELECT * FROM category
     </select>
 
+    <select id="getCategorys" resultMap="com.eryi.mapper.CommonResultMaps.CategoryResultMap">
+        SELECT * FROM category
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="level != null">
+                AND level = #{level}
+            </if>
+            <if test="parentId != null">
+                AND parent_id = #{parentId}
+            </if>
+        </where>
+    </select>
+
 </mapper>

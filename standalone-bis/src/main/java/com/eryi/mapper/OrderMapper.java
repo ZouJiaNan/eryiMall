@@ -9,4 +9,5 @@ public interface OrderMapper {
     Order findOrderByUserId(String userId);
     Order findOrderById(String id);
     int addOrder(OrderPo orderPo);
+    int updateOrder(OrderPo orderPo);
 }

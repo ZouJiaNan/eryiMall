@@ -21,6 +21,10 @@ public class OrderDao {
         return order;
     }
 
+    public int updateOrder(Order order) {
+        return orderMapper.updateOrder(OrderBoToPo(order));
+    }
+
     public Order findOrderById(String id) {
         return build(orderMapper.findOrderById(id));
     }

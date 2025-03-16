@@ -54,4 +54,8 @@ public class OnSaleDao {
         onSalePo.setSalePrice(onSale.getSalePrice());
         return onSalePo;
     }
+
+    public List<OnSale> getProducts(String categoryId,String name){
+        return onSaleMapper.getProductsByCate(categoryId);
+    }
 }

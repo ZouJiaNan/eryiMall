@@ -1,8 +1,6 @@
 package com.eryi.service;
 
-import com.eryi.bean.bo.product.Category;
-import com.eryi.bean.bo.product.OnSale;
-import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.bo.product.*;
 import com.eryi.bean.bo.shop.ShipingFeeTemp;
 import com.eryi.bean.dto.ShipingFeeTempDto;
 import com.eryi.dao.ShipingFeeTempDao;
@@ -55,4 +53,17 @@ public interface MerchantService {
      * @return
      */
     List<Product> getProductList(String userId);
+    /**
+     * 新增SPU
+     * @param spu
+     * @return
+     */
+    int addSPU(SPU spu);
+
+    /**
+     * 新增SKU
+     * @param sku
+     * @return
+     */
+    int addSKU(SKU sku);
 }

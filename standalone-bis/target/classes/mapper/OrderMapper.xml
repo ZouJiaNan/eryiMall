@@ -41,4 +41,11 @@
         where
             o.id=#{id}
     </select>
+
+    <update id="updateOrder" parameterType="com.eryi.bean.po.OrderPo">
+        UPDATE `order` SET
+            status=#{status}
+        WHERE
+            id=#{id}
+    </update>
 </mapper>

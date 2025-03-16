@@ -46,18 +46,6 @@
         <result property="platformDivision" column="platform_division" />
         <!--association property="parentCategory" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/-->
     </resultMap>
-    <!--商品-->
-    <resultMap id="ProductResultMap" type="com.eryi.bean.bo.product.Product">
-        <id property="id" column="id" />
-        <result property="name" column="category_id" />
-        <result property="specs" column="specs" />
-        <result property="tags" column="tags" />
-        <result property="platformDivision" column="platform_division" />
-        <result property="imags" column="imags" />
-        <association property="shipingFeeTemp" javaType="com.eryi.bean.bo.shop.ShipingFeeTemp" resultMap="ShipingFeeTempResultMap"/>
-        <association property="category" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
-        <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
-    </resultMap>
     <!--销售信息-->
     <resultMap id="OnSaleResultMap" type="com.eryi.bean.bo.product.OnSale">
         <result property="id" column="id"/>
@@ -69,7 +57,40 @@
         <result property="endTime" column="end_time"/>
         <result property="listingStatus" column="listing_status"/>
         <result property="salePrice" column="sale_price"/>
-        <association property="product" javaType="com.eryi.bean.bo.product.Product" resultMap="ProductResultMap"/>
+    </resultMap>
+    <!--Spec-->
+    <resultMap id="SpecResultMap" type="com.eryi.bean.bo.product.Spec">
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="type" column="type"/>
+        <result property="unit" column="unit"/>
+    </resultMap>
+    <!--SKU-->
+    <resultMap id="SkuResultMap" type="com.eryi.bean.bo.product.SKU">
+        <result property="id" column="id" />
+        <result property="specValues" column="specValues" />
+        <result property="amount" column="type"/>
+        <result property="images" column="images"/>
+        <association property="shop" javaType="com.eryi.bean.bo.product.OnSale" resultMap="OnSaleResultMap"/>
+    </resultMap>
+    <!--SPU-->
+    <resultMap id="SPUResultMap" type="com.eryi.bean.bo.product.SPU">
+        <result property="id" column="id" />
+        <result property="mainImage" column="main_image" />
+        <collection property="spes" resultMap="SpecResultMap"/>
+        <collection property="skus" resultMap="SkuResultMap"/>
+    </resultMap>
+    <!--商品-->
+    <resultMap id="ProductResultMap" type="com.eryi.bean.bo.product.Product">
+        <id property="id" column="id" />
+        <result property="name" column="category_id" />
+        <result property="tags" column="tags" />
+        <result property="platformDivision" column="platform_division" />
+        <result property="imags" column="imags" />
+        <association property="shipingFeeTemp" javaType="com.eryi.bean.bo.shop.ShipingFeeTemp" resultMap="ShipingFeeTempResultMap"/>
+        <association property="category" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
+        <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
+        <association property="spu" javaType="com.eryi.bean.bo.product.SPU" resultMap="SpuResultMap"/>
     </resultMap>
     <!--购物车-->
     <resultMap id="CarResultMap" type="com.eryi.bean.bo.customer.Car">

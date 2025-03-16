@@ -13,7 +13,6 @@
             start_time,
             end_time,
             listing_status,
-            product_id,
             sale_price
         )
         VALUES (
@@ -25,7 +24,6 @@
                    #{startTime},
                    #{endTime},
                    #{listingStatus},
-                   #{productId},
                    #{salePrice}
                )
     </insert>
@@ -39,18 +37,34 @@
             start_time = #{startTime},
             end_time = #{endTime},
             listing_status = #{listingStatus},
-            product_id = #{productId},
             sale_price = #{salePrice}
         WHERE
             id = #{id}
     </update>
 
     <select id="getOnSaleList" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
-        SELECT * from onSale join product on onSale.product_id=product.id
+        SELECT * from onSale
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
         SELECT * from onSale where id = #{id}
     </select>
 
+    <select id="getProducts" parameterType="com.eryi.bean.po.ProductPo" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
+        select
+            onsale.sale_price
+            onsale.price,
+            product.tags,
+            product.name,
+            product.imags
+        from product join onsale on product.id=onsale.product_id
+        <where>
+            <if test="name != null and name != ''">
+                AND product.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -26,10 +26,6 @@ public class ProductPo {
      */
     private String name;
     /**
-     * 规格
-     */
-    private String specs;
-    /**
      * 标签
      */
     private String tags;
@@ -37,10 +33,6 @@ public class ProductPo {
      * 描述
      */
     private BigDecimal platformDivision;
-    /**
-     * 图片路径
-     */
-    private String imags;
     /**
      * 关联商品
      */
@@ -57,4 +49,12 @@ public class ProductPo {
      * 商铺
      */
     private String shopId;
+    /**
+     * spu的json
+     */
+    private String spu;
+    /**
+     * sku的json
+     */
+    private String sku;
 }

@@ -22,21 +22,13 @@ public class Product {
      */
     private String name;
     /**
-     * 规格
-     */
-    private String specs;
-    /**
      * 标签
      */
     private String tags;
     /**
-     * 描述
+     * 平台分成
      */
     private BigDecimal platformDivision;
-    /**
-     * 图片路径
-     */
-    private String imags;
     /**
      * 关联商品
      */
@@ -53,6 +45,14 @@ public class Product {
      * 商铺
      */
     private Shop shop;
+    /**
+     * 描述
+     */
+    private String description;
+    /**
+     * 标准产品单元
+     */
+    private SPU spu;
 
     public Product(){
         this.category=new Category();

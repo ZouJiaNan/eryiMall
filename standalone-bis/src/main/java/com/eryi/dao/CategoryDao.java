@@ -6,6 +6,8 @@ import com.eryi.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CategoryDao {
 
@@ -19,5 +21,9 @@ public class CategoryDao {
         categoryPo.setLevel(category.getLevel());
         categoryPo.setPlatformDivision(category.getPlatformDivision());
         return categoryMapper.addCategory(categoryPo);
+    }
+
+    public List<Category> getCategorys(int level,String ParentId){
+        return categoryMapper.getCategorys(level,ParentId);
     }
 }

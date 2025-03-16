@@ -1,8 +1,6 @@
 package com.eryi.service.impl;
 
-import com.eryi.bean.bo.product.Category;
-import com.eryi.bean.bo.product.OnSale;
-import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.bo.product.*;
 import com.eryi.bean.bo.shop.RegionTemplate;
 import com.eryi.bean.bo.shop.ShipingFeeTemp;
 import com.eryi.bean.dto.ProductDto;
@@ -73,5 +71,15 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public List<Product> getProductList(String userId) {
         return productDao.findAll();
+    }
+
+    @Override
+    public int addSPU(SPU spu) {
+        return 0;
+    }
+
+    @Override
+    public int addSKU(SKU sku) {
+        return 0;
     }
 }

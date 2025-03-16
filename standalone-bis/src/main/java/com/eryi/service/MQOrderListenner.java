@@ -8,6 +8,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQPushConsumerLifecycleListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,14 @@ import org.springframework.stereotype.Service;
         consumeThreadNumber = 4   // 消费线程数
 )
 @Slf4j
-public class MQOrderListenner implements RocketMQPushConsumerLifecycleListener {
+public class MQOrderListenner implements RocketMQListener,RocketMQPushConsumerLifecycleListener {
     @Autowired
     CustomerService customerService;
+
+    @Override
+    public void onMessage(Object o) {
+
+    }
 
     @Override
     public void prepareStart(DefaultMQPushConsumer defaultMQPushConsumer) {
@@ -32,10 +38,11 @@ public class MQOrderListenner implements RocketMQPushConsumerLifecycleListener {
                     //订单落库
                     Order order = JSON.parseObject(msg.getBody(), Order.class);
                     customerService.addOrder(order);
-                    log.info("订单落库-" + order.toString());
+                    log.info("订单落库成功:" + order.toString());
                     // 手动ACK（成功）
                     context.setAckIndex(msgs.indexOf(msg));
                 } catch (Exception e) {
+                    log.info("订单落库失败:" + e.getMessage());
                     // 消息重试（失败）
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }

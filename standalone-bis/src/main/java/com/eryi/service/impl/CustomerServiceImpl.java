@@ -3,11 +3,10 @@ package com.eryi.service.impl;
 import com.eryi.bean.bo.customer.Car;
 import com.eryi.bean.bo.pay.order.Order;
 import com.eryi.bean.bo.pay.order.OrderItem;
+import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.bo.product.OnSale;
-import com.eryi.dao.CarDao;
-import com.eryi.dao.OnSaleDao;
-import com.eryi.dao.OrderDao;
-import com.eryi.dao.ProductDao;
+import com.eryi.bean.bo.product.Product;
+import com.eryi.dao.*;
 import com.eryi.service.CustomerService;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -35,6 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    CategoryDao categoryDao;
 
     @Value("${my.topic.order.delayed}")
     private String orderDelayedTopic;
@@ -114,7 +116,7 @@ public class CustomerServiceImpl implements CustomerService {
                 System.out.println("–¥—”≥Ÿ∂”¡– ß∞‹£∫" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
-        },3000,9);
+        },3000,1);
         return future;
     }
 
@@ -138,4 +140,15 @@ public class CustomerServiceImpl implements CustomerService {
     public List<OnSale> getOnSaleList(String userId) {
         return onSaleDao.getOnSaleList(userId);
     }
+
+    @Override
+    public List<OnSale> getProducts(String categoryId,String name) {
+        return onSaleDao.getProducts(categoryId,name);
+    }
+
+    @Override
+    public List<Category> getCategorys(int level,String ParentId) {
+        return categoryDao.getCategorys(level,ParentId);
+    }
+
 }

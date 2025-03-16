@@ -43,8 +43,7 @@ public class OnSalePo {
      */
     private int listingStatus;
     /**
-     * 商品
+     * 销售价
      */
-    private String productId;
     private BigDecimal salePrice;
 }

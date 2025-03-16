@@ -45,10 +45,11 @@ public class OnSale {
      * 上架状态
      */
     private int listingStatus;
+
     /**
-     * 商品
+     * 标准库存单元编码
      */
-    private Product product;
+    private String skuCode;
     private BigDecimal salePrice;
 
     public OnSale(String id){

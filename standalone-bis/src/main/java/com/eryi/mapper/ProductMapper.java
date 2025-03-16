@@ -12,4 +12,7 @@ public interface ProductMapper {
     int addProduct(ProductPo productPo);
     Product getProductById(String productId);
     List<Product> findAll();
+    List<Product> getProducts(ProductPo productPo);
+
+    int editProduct(ProductPo productPo);
 }

@@ -48,7 +48,7 @@ public class Order implements Serializable {
     private List<OrderItem> orderItems;
     /**
      * 状态
-     * 1.未支付 2.已支付 3.已发货 4.已收货 5.已退款 6.已取消
+     * 1.未支付 2.已支付 3.已发货 4.已收货 5.已退款 6.已取消 7.超期
      */
     private int status;
 
