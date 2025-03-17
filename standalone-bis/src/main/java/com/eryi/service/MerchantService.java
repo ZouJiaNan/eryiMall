@@ -55,15 +55,16 @@ public interface MerchantService {
     List<Product> getProductList(String userId);
     /**
      * 新增SPU
-     * @param spu
+     * @param spuJson
      * @return
      */
-    int addSPU(SPU spu);
+    int addSPU(String productId,String spuJson);
 
     /**
      * 新增SKU
-     * @param sku
+     * @param productId
+     * @param skuJson
      * @return
      */
-    int addSKU(SKU sku);
+    int addSKU(String productId,String skuJson);
 }

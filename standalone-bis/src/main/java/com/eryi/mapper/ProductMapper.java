@@ -15,4 +15,5 @@ public interface ProductMapper {
     List<Product> getProducts(ProductPo productPo);
 
     int editProduct(ProductPo productPo);
+    int addSPU(String spuJson);
 }

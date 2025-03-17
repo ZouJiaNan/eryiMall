@@ -57,6 +57,7 @@
         <result property="endTime" column="end_time"/>
         <result property="listingStatus" column="listing_status"/>
         <result property="salePrice" column="sale_price"/>
+        <result property="skuCode" column="sku_code"/>
     </resultMap>
     <!--Spec-->
     <resultMap id="SpecResultMap" type="com.eryi.bean.bo.product.Spec">
@@ -71,7 +72,6 @@
         <result property="specValues" column="specValues" />
         <result property="amount" column="type"/>
         <result property="images" column="images"/>
-        <association property="shop" javaType="com.eryi.bean.bo.product.OnSale" resultMap="OnSaleResultMap"/>
     </resultMap>
     <!--SPU-->
     <resultMap id="SPUResultMap" type="com.eryi.bean.bo.product.SPU">
@@ -90,7 +90,7 @@
         <association property="shipingFeeTemp" javaType="com.eryi.bean.bo.shop.ShipingFeeTemp" resultMap="ShipingFeeTempResultMap"/>
         <association property="category" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
         <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>
-        <association property="spu" javaType="com.eryi.bean.bo.product.SPU" resultMap="SpuResultMap"/>
+        <association property="spu" javaType="com.eryi.bean.bo.product.SPU" resultMap="SPUResultMap"/>
     </resultMap>
     <!--购物车-->
     <resultMap id="CarResultMap" type="com.eryi.bean.bo.customer.Car">

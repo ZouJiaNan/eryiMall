@@ -10,8 +10,8 @@ import lombok.*;
 public class SKU {
     private String id;
     private String specValues;
-    private int amount;
     private OnSale onSale;
     private String images;
     private String productId;
+    private String skuCode;
 }

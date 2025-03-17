@@ -50,8 +50,9 @@ public class OnSaleDao {
         onSalePo.setStartTime(onSale.getStartTime());
         onSalePo.setEndTime(onSale.getEndTime());
         onSalePo.setListingStatus(onSale.getListingStatus());
-        onSalePo.setProductId(onSale.getProduct().getId());
         onSalePo.setSalePrice(onSale.getSalePrice());
+        onSalePo.setSkuCode(onSale.getSkuCode());
+        onSalePo.setProductId(onSale.getProductId());
         return onSalePo;
     }
 

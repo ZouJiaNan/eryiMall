@@ -46,4 +46,12 @@ public class OnSalePo {
      * 销售价
      */
     private BigDecimal salePrice;
+    /**
+     * sku编码
+     */
+    private String skuCode;
+    /**
+     * 商品id
+     */
+    private String productId;
 }

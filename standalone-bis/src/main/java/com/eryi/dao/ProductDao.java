@@ -1,5 +1,6 @@
 package com.eryi.dao;
 
+import com.alibaba.fastjson.JSON;
 import com.eryi.bean.bo.product.Product;
 import com.eryi.bean.po.ProductPo;
 import com.eryi.mapper.ProductMapper;
@@ -37,19 +38,24 @@ public class ProductDao {
 
     public List<Product> getProducts(ProductPo productPo){return productMapper.getProducts(productPo);}
 
+    public int addSPU(String productId,String spuJson){
+        Product product=productMapper.getProductById(productId);
+        ProductPo productPo = BoToPo(product);
+        productPo.setSpu(spuJson);
+        return productMapper.editProduct(productPo);
+    }
+    public int addSKU(String productId,String skuJson){
+        Product product=productMapper.getProductById(productId);
+        ProductPo productPo = BoToPo(product);
+        productPo.setSku(skuJson);
+        return productMapper.editProduct(productPo);
+    }
     private ProductPo BoToPo(Product product){
         ProductPo productPo=new ProductPo();
         productPo.setId(product.getId());
-        productPo.setSpecs(product.getSpu().getSpes().toString());
         productPo.setName(product.getName());
         productPo.setTags(product.getTags());
         productPo.setPlatformDivision(product.getPlatformDivision());
-//        productPo.setAssociatedProdIds(product.getAssociatedProdIds());
-//        productPo.setCouponDiscountId(product.getCouponDiscountId());
-//        productPo.setShipingFeeTempId(product.getShipingFeeTempId());
-//        productPo.setShopId(product.getShop().getId());
-        productPo.setSpu(product.getSpu().toString());
-        productPo.setSku(product.getSpu().getSkus().toString());
         return productPo;
     }
 }

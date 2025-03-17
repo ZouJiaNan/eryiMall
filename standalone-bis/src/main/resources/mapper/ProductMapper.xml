@@ -5,14 +5,14 @@
 <mapper namespace="com.eryi.mapper.ProductMapper">
     <insert id="addProduct" parameterType="com.eryi.bean.po.ProductPo">
         INSERT INTO product (
-            id,name, category_id, specs, tags, platform_division,
-            imags, associated_prod_ids, coupon_discount_id,
-            shiping_fee_temp_id, shop_id
+            id,name, category_id, tags, platform_division,
+            associated_prod_ids, coupon_discount_id,
+            shiping_fee_temp_id, shop_id, spu, sku
         )
         VALUES (
-                   #{id},#{name}, #{categoryId}, #{specs}, #{tags}, #{platformDivision},
-                   #{imags}, #{associatedProdIds}, #{couponDiscountId},
-                   #{shipingFeeTempId}, #{shopId}
+                   #{id},#{name}, #{categoryId}, #{tags}, #{platformDivision},
+                   #{associatedProdIds}, #{couponDiscountId},
+                   #{shipingFeeTempId}, #{shopId}, #{spu}, #{sku}
                )
     </insert>
 
@@ -22,25 +22,25 @@
     </delete>
 
     <!-- 动态更新 -->
-    <update id="updateById" parameterType="com.eryi.bean.po.ProductPo">
+    <update id="editProduct" parameterType="com.eryi.bean.po.ProductPo">
         UPDATE product
         <set>
             <if test="name != null">name = #{name},</if>
             <if test="categoryId != null">category_id = #{categoryId},</if>
-            <if test="specs != null">specs = #{specs},</if>
             <if test="tags != null">tags = #{tags},</if>
             <if test="platformDivision != null">platform_division = #{platformDivision},</if>
-            <if test="imags != null">imags = #{imags},</if>
             <if test="associatedProdIds != null">associated_prod_ids = #{associatedProdIds},</if>
             <if test="couponDiscountId != null">coupon_discount_id = #{couponDiscountId},</if>
             <if test="shipingFeeTempId != null">shiping_fee_temp_id = #{shipingFeeTempId},</if>
-            <if test="shopId != null">shop_id = #{shopId}</if>
+            <if test="shopId != null">shop_id = #{shopId},</if>
+            <if test="spu != null">spu = #{spu},</if>
+            <if test="sku != null">sku = #{sku}</if>
         </set>
         WHERE id = #{id}
     </update>
 
     <!-- 根据ID查询 -->
-    <select id="selectById" parameterType="Long" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
+    <select id="getProductById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
         SELECT * FROM product WHERE id = #{id}
     </select>
 

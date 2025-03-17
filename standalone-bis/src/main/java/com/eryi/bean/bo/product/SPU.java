@@ -13,4 +13,5 @@ public class SPU {
     private List<Spec> spes;
     private List<SKU> skus;
     private String mainImage;
+    private String productId;
 }

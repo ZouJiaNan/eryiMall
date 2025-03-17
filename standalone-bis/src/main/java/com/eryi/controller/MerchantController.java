@@ -10,8 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,51 +48,62 @@ public class MerchantController extends BaseController {
         product.getCategory().setId(productDto.getCategoryId());
         product.setTags(productDto.getTags());
         product.getShipingFeeTemp().setId(productDto.getFreeTemplateId());
+        product.setPlatformDivision(productDto.getPlatformDivision());
+        product.setShop(new Shop());
         return success(merchantService.addProduct(product));
     }
 
     /**
      * 新增SPU
-     * @param spuDto
+     * @param spuJson
      * @return
      */
     @PostMapping("/spu")
-    public ResultBean addSPU(@RequestBody SPUDto spuDto) {
-        SPU spu = new SPU();
-        spu.setId(UUID.randomUUID().toString());
-        spu.setMainImage(spuDto.getMainImage());
-        spu.setSpes(spuDto.getSpecs());
-        return success(merchantService.addSPU(spu));
+    public ResultBean addSPU(String productId,String spuJson) {
+        return success(merchantService.addSPU(productId,spuJson));
     }
 
-    /**
-     * 获得SPU
-     * @param userId
-     * @param spuDto
-     * @return
-     */
-    @GetMapping("/spu")
-    public ResultBean getSPU(String userId,SPUDto spuDto) {
-        SPU spu = new SPU();
-        spu.setId(UUID.randomUUID().toString());
-        spu.setMainImage(spuDto.getMainImage());
-        spu.setSpes(spuDto.getSpecs());
-        return success(merchantService.addSPU(spu));
-    }
+//    /**
+//     * 获得SPU
+//     * @param userId
+//     * @param spuDto
+//     * @return
+//     */
+//    @GetMapping("/spu")
+//    public ResultBean getSPU(String userId,SPUDto spuDto) {
+//        return success(merchantService.getSPU(userId,spuDto));
+//    }
 
     /**
      * 新增SKU
      * @param userId
-     * @param skuDto
+     * @param productId
+     * @param skuJson
      * @return
      */
     @PostMapping("/sku")
-    public ResultBean addSKU(String userId,SkuDto skuDto) {
-        SKU sku = new SKU();
-        sku.setId(UUID.randomUUID().toString());
-        sku.setSpecValues(skuDto.getSpecValues());
-        sku.setProductId(skuDto.getProductId());
-        return success(merchantService.addSKU(sku));
+    public ResultBean addSKU(String userId,String productId,String skuJson) {
+        return success(merchantService.addSKU(productId,skuJson));
+    }
+
+    /**
+     * 新增售卖信息
+     * @return
+     */
+    @PostMapping("/addOnSale")
+    public ResultBean addOnSale(@RequestBody OnsaleDto onsaleDto) {
+        OnSale onSale=new OnSale();
+        onSale.setId(UUID.randomUUID().toString());
+        onSale.setSalePrice(onsaleDto.getSalePrice());
+        onSale.setPrice(onsaleDto.getPrice());
+        onSale.setAmount(onsaleDto.getAmount());
+        onSale.setStartTime(onsaleDto.getStartTime());
+        onSale.setEndTime(onsaleDto.getEndTime());
+        onSale.setListingStatus(onsaleDto.getListingStatus());
+        onSale.setOrderNum(onsaleDto.getOrderNum());
+        onSale.setSkuCode(onsaleDto.getSkuCode());
+        onSale.setProductId(onsaleDto.getProductId());
+        return success(merchantService.addOnSale(onSale));
     }
 
 
@@ -121,29 +130,7 @@ public class MerchantController extends BaseController {
         onSale.setEndTime(onSale.getEndTime());
         onSale.setListingStatus(onsaleDto.getListingStatus());
         onSale.setOrderNum(onSale.getOrderNum());
-        onSale.setProduct(new Product());
-        onSale.getProduct().setId(onsaleDto.getProductId());
         return success(merchantService.editOnSale(onSale));
-    }
-
-    /**
-     * 新增售卖信息
-     * @return
-     */
-    @PostMapping("/addOnSale")
-    public ResultBean addOnSale(@RequestBody OnsaleDto onsaleDto) {
-        OnSale onSale=new OnSale();
-        onSale.setId(UUID.randomUUID().toString());
-        onSale.setSalePrice(onsaleDto.getSalePrice());
-        onSale.setPrice(onsaleDto.getPrice());
-        onSale.setAmount(onsaleDto.getAmount());
-        onSale.setStartTime(onsaleDto.getStartTime());
-        onSale.setEndTime(onsaleDto.getEndTime());
-        onSale.setListingStatus(onsaleDto.getListingStatus());
-        onSale.setOrderNum(onsaleDto.getOrderNum());
-        onSale.setProduct(new Product());
-        onSale.getProduct().setId(onsaleDto.getProductId());
-        return success(merchantService.addOnSale(onSale));
     }
 
     /**
@@ -217,19 +204,5 @@ public class MerchantController extends BaseController {
      */
     public ResultBean sendOutOrder() {
         return null;
-    }
-
-    /**
-     * 新增SPU
-     * @param userId
-     * @param spuDto
-     * @return
-     */
-    public ResultBean addSPU(String userId,SPUDto spuDto) {
-        SPU spu = new SPU();
-        spu.setId(UUID.randomUUID()+"");
-        spu.setMainImage(spuDto.getMainImage());
-        spu.setSpes(spuDto.getSpecs());
-        return  success(merchantService.addSPU(spu));
     }
 }

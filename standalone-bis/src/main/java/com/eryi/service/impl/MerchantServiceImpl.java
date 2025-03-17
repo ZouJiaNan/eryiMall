@@ -6,12 +6,14 @@ import com.eryi.bean.bo.shop.ShipingFeeTemp;
 import com.eryi.bean.dto.ProductDto;
 import com.eryi.bean.dto.ResultBean;
 import com.eryi.bean.dto.ShipingFeeTempDto;
+import com.eryi.bean.po.ProductPo;
 import com.eryi.dao.*;
 import com.eryi.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,12 +76,12 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public int addSPU(SPU spu) {
-        return 0;
+    public int addSPU(String productId,String spuJson) {
+        return productDao.addSPU(productId,spuJson);
     }
 
     @Override
-    public int addSKU(SKU sku) {
-        return 0;
+    public int addSKU(String productId,String skuJson) {
+        return productDao.addSKU(productId,skuJson);
     }
 }
