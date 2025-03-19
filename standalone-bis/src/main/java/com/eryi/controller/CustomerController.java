@@ -8,6 +8,7 @@ import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
 import com.eryi.bean.dto.OrderDto;
 import com.eryi.bean.dto.ResultBean;
+import com.eryi.bean.po.CategoryPo;
 import com.eryi.bean.po.OnSalePo;
 import com.eryi.bean.vo.CategoryCustomerVO;
 import com.eryi.bean.vo.ProductCustomerVO;
@@ -80,46 +81,46 @@ public class CustomerController extends BaseController{
      * @return
      */
     @GetMapping("/getCategorys")
-    public ResultBean getCategorys(String userId,int level,String ParentId,int pageNum,int pageSize) {
+    public ResultBean getCategorys(String userId,int level,String parentId,int pageNum,int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Category> categories = customerService.getCategorys(level,ParentId);
+        CategoryPo categoryPo=new CategoryPo();
+        categoryPo.setLevel(level);
+        categoryPo.setName("");
+        categoryPo.setParentId(parentId);
+        List<Category> categories = customerService.getCategorys(categoryPo);
         PageInfo<Category> pageInfo = new PageInfo<>(categories);
         List<CategoryCustomerVO> categorys = new ArrayList<>();
         pageInfo.getList().forEach(category -> {
             String id=category.getId();
             String name=category.getName();
-            String parentId=category.getParentId();
-            CategoryCustomerVO categoryCustomerVO=new CategoryCustomerVO(id,name,parentId);
+            CategoryCustomerVO categoryCustomerVO=new CategoryCustomerVO(id,name,category.getParentId());
             categorys.add(categoryCustomerVO);
         });
         return success(categorys);
     }
 
-//    /**
-//     * 查看分类下的商品列表
-//     * @param userId
-//     * @param pageNum
-//     * @param pageSize
-//     * @return
-//     */
-//    @GetMapping("/getProductsByCate")
-//    public ResultBean getProductsByCate(String userId,String categoryId,int pageNum,int pageSize) {
-//        PageHelper.startPage(pageNum, pageSize);
-//        List<OnSale> onSales = customerService.getProducts(categoryId,null);
-//        PageInfo<OnSale> pageInfo = new PageInfo<>(onSales);
-//        List<ProductCustomerVO> products = new ArrayList<>();
-//        pageInfo.getList().forEach(onSale -> {
-//            String name = onSale.getProduct().getName();
-//            String id=onSale.getProduct().getId();
-//            BigDecimal price=onSale.getPrice();
-//            BigDecimal salePrice=onSale.getSalePrice();
-//            String images=onSale.getProduct().getImags();
-//            String tags=onSale.getProduct().getTags();
-//            ProductCustomerVO productCustomerVO=new ProductCustomerVO(id,name,price.toString(),salePrice.toString(),images,tags);
-//            products.add(productCustomerVO);
-//        });
-//        return success(products);
-//    }
+    /**
+     * 查看分类下的商品列表
+     * @param userId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/getProductsByCate")
+    public ResultBean getProductsByCate(String userId,String categoryId,int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Product> products = customerService.getProducts(categoryId,null);
+        PageInfo<Product> pageInfo = new PageInfo<>(products);
+        List<ProductCustomerVO> productCustomerVOS = new ArrayList<>();
+        pageInfo.getList().forEach(product -> {
+            ProductCustomerVO productCustomerVO = new ProductCustomerVO();
+            productCustomerVO.setId(product.getId());
+            productCustomerVO.setName(product.getName());
+            productCustomerVO.setMainImage(product.getSpu().getMainImage());
+            productCustomerVOS.add(productCustomerVO);
+        });
+        return success(productCustomerVOS);
+    }
 
 //    /**
 //     * 搜索商品

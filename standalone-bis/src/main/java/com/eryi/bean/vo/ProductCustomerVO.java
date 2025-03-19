@@ -11,7 +11,6 @@ public class ProductCustomerVO {
     private String id;
     private String name;
     private String price;
-    private String salePrice;
-    private String images;
+    private String mainImage;
     private String tags;
 }

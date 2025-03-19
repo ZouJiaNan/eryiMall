@@ -39,7 +39,7 @@
         SELECT * FROM category
     </select>
 
-    <select id="getCategorys" resultMap="com.eryi.mapper.CommonResultMaps.CategoryResultMap">
+    <select id="getCategorys" parameterType="com.eryi.bean.po.CategoryPo" resultMap="com.eryi.mapper.CommonResultMaps.CategoryResultMap">
         SELECT * FROM category
         <where>
             <if test="name != null and name != ''">

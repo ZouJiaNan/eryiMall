@@ -4,6 +4,7 @@ import com.eryi.bean.bo.pay.order.Order;
 import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.po.CategoryPo;
 
 import java.util.List;
 
@@ -40,11 +41,11 @@ public interface CustomerService {
      * 获取商品列表
      * @return
      */
-    List<OnSale> getProducts(String categoryId,String name);
+    List<Product> getProducts(String categoryId,String name);
 
     /**
      * 获取商品分类列表
      * @return
      */
-    List<Category> getCategorys(int level,String ParentId);
+    List<Category> getCategorys(CategoryPo categoryPo);
 }

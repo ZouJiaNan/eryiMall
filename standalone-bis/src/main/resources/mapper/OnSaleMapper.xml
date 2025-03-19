@@ -54,22 +54,4 @@
     <select id="findById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
         SELECT * from onSale where id = #{id}
     </select>
-
-    <select id="getProducts" parameterType="com.eryi.bean.po.ProductPo" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
-        select
-            onsale.sale_price
-            onsale.price,
-            product.tags,
-            product.name,
-            product.imags
-        from product join onsale on product.id=onsale.product_id
-        <where>
-            <if test="name != null and name != ''">
-                AND product.name LIKE CONCAT('%', #{name}, '%')
-            </if>
-            <if test="categoryId != null">
-                AND category_id = #{categoryId}
-            </if>
-        </where>
-    </select>
 </mapper>

@@ -6,6 +6,8 @@ import com.eryi.bean.bo.pay.order.OrderItem;
 import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.po.CategoryPo;
+import com.eryi.bean.po.ProductPo;
 import com.eryi.dao.*;
 import com.eryi.service.CustomerService;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -142,13 +144,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<OnSale> getProducts(String categoryId,String name) {
-        return onSaleDao.getProducts(categoryId,name);
+    public List<Product> getProducts(String categoryId,String name) {
+        ProductPo productPo=new ProductPo();
+        productPo.setCategoryId(categoryId);
+        return productDao.getProducts(productPo);
     }
 
     @Override
-    public List<Category> getCategorys(int level,String ParentId) {
-        return categoryDao.getCategorys(level,ParentId);
+    public List<Category> getCategorys(CategoryPo categoryPo) {
+        return categoryDao.getCategorys(categoryPo);
     }
 
 }

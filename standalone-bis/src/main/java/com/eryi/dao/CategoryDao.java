@@ -3,6 +3,7 @@ package com.eryi.dao;
 import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.po.CategoryPo;
 import com.eryi.mapper.CategoryMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public class CategoryDao {
         return categoryMapper.addCategory(categoryPo);
     }
 
-    public List<Category> getCategorys(int level,String ParentId){
-        return categoryMapper.getCategorys(level,ParentId);
+    public List<Category> getCategorys(CategoryPo categoryPo){
+        return categoryMapper.getCategorys(categoryPo);
     }
 }

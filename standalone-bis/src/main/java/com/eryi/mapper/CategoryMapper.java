@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface CategoryMapper {
     int addCategory(CategoryPo categoryPo);
-    List<Category> getCategorys(int level,String ParentId);
+    List<Category> getCategorys(CategoryPo categoryPo);
 }
