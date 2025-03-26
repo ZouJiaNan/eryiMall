@@ -54,6 +54,11 @@ public class Product {
      */
     private SPU spu;
 
+    /**
+     * 标准库存单元
+     */
+    private SKU sku;
+
     public Product(){
         this.category=new Category();
         this.shipingFeeTemp=new ShipingFeeTemp();

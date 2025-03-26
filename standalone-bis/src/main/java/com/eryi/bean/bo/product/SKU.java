@@ -2,6 +2,8 @@ package com.eryi.bean.bo.product;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -9,7 +11,7 @@ import lombok.*;
 @Setter
 public class SKU {
     private String id;
-    private String specValues;
+    private List<Spec> specs;
     private OnSale onSale;
     private String images;
     private String productId;

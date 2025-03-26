@@ -17,9 +17,17 @@ public class OrderItemDto {
      */
     private String orderId;
     /**
-     * 商铺销售消息
+     * 销售信息id
      */
     private String onSaleId;
+    /**
+     * 商品id
+     */
+    private String productId;
+    /**
+     * sku
+     */
+    private String skuCode;
     /**
      * 总价
      */

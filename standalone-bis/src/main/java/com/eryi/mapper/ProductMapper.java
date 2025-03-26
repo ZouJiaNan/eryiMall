@@ -13,7 +13,7 @@ public interface ProductMapper {
     Product getProductById(String productId);
     List<Product> findAll();
     List<Product> getProducts(ProductPo productPo);
-
+    Product getProductDetail(String productId);
     int editProduct(ProductPo productPo);
     int addSPU(String spuJson);
 }

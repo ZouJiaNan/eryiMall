@@ -43,6 +43,8 @@ public interface CustomerService {
      */
     List<Product> getProducts(String categoryId,String name);
 
+    Product getProductDetail(String productId);
+
     /**
      * 获取商品分类列表
      * @return

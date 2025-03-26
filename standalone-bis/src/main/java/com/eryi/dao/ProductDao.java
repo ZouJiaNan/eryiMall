@@ -38,6 +38,10 @@ public class ProductDao {
 
     public List<Product> getProducts(ProductPo productPo){return productMapper.getProducts(productPo);}
 
+    public Product getProductDetail(String productId){
+        return productMapper.getProductDetail(productId);
+    }
+
     public int addSPU(String productId,String spuJson){
         Product product=productMapper.getProductById(productId);
         ProductPo productPo = BoToPo(product);

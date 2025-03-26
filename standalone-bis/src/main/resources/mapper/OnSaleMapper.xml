@@ -51,7 +51,18 @@
         SELECT * from onSale
     </select>
 
-    <select id="findById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
-        SELECT * from onSale where id = #{id}
+    <select id="findBySkuCodeAndProductId" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.OnSaleResultMap">
+        SELECT
+        id as order_id,
+        order_Num as order_num,
+        price as order_price,
+        amount,
+        remain,
+        start_time,
+        end_time,
+        listing_status,
+        sale_price,
+        sku_code
+        from onSale where sku_code = #{skuCode} and product_id = #{productId}
     </select>
 </mapper>

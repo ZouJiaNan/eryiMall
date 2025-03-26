@@ -16,9 +16,17 @@ public class OrderItemPo {
      */
     private String orderId;
     /**
-     * 商铺销售消息
+     * 销售消息
      */
     private String onSaleId;
+    /**
+     * 商品id
+     */
+    private String productId;
+    /**
+     * sku编码
+     */
+    private String skuCode;
     /**
      * 总价
      */

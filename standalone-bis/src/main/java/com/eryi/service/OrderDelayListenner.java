@@ -38,7 +38,9 @@ public class OrderDelayListenner implements RocketMQListener<Order> {
             order.setStatus(7);
             orderDao.updateOrder(order);
             // Õ∑≈ø‚¥Ê
-            OnSale onSale = onSaleDao.findById(order.getOrderItems().get(0).getOnSale().getId());
+            String skuCode = order.getOrderItems().get(0).getProduct().getSku().getSkuCode();
+            String productId = order.getOrderItems().get(0).getProduct().getId();
+            OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
             onSaleDao.releaseStock(onSale,order.getOrderItems().get(0).getCount());
         }
     }

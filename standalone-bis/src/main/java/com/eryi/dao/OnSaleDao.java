@@ -17,8 +17,8 @@ public class OnSaleDao {
         onSale.setOnSaleDao(this);
         return onSale;
     }
-    public OnSale findById(String onSaleId){
-        return build(onSaleMapper.findById(onSaleId));
+    public OnSale findBySkuCodeAndProductId(String productId,String skuCode){
+        return build(onSaleMapper.findBySkuCodeAndProductId(productId,skuCode));
     }
     public int addOnSale(OnSale onSale){
         return onSaleMapper.addOnSale(BoToPo(onSale));

@@ -52,16 +52,16 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * 添加购物车
      * @param userId
-     * @param onSaleId
+     * @param productId
      * @return
      */
     @Override
     @Transactional
-    public int addCarItem(String userId,String onSaleId) {
+    public int addCarItem(String userId,String productId) {
         //获取满血模型
         Car car = carDao.findByUserId(userId);
         //添加购物车
-        return car.addCarItem(car.getId(),onSaleId);
+        return car.addCarItem(car.getId(),productId);
     }
 
     /**
@@ -73,7 +73,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public int createOrder(Order order) {
         //锁定库存
-        OnSale onSale = onSaleDao.findById(order.getOrderItems().get(0).getOnSale().getId());
+        String skuCode = order.getOrderItems().get(0).getProduct().getSku().getSkuCode();
+        String productId = order.getOrderItems().get(0).getProduct().getId();
+        OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
         onSale.lockStock(order);
 
         CompletableFuture<Object> future1 = new CompletableFuture<>();
@@ -148,6 +150,11 @@ public class CustomerServiceImpl implements CustomerService {
         ProductPo productPo=new ProductPo();
         productPo.setCategoryId(categoryId);
         return productDao.getProducts(productPo);
+    }
+
+    @Override
+    public Product getProductDetail(String productId) {
+        return productDao.getProductDetail(productId);
     }
 
     @Override

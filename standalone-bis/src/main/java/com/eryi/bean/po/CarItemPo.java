@@ -10,5 +10,5 @@ import lombok.*;
 @Setter
 public class CarItemPo {
     private String carId;
-    private String onSaleId;
+    private String productId;
 }

@@ -24,4 +24,5 @@ public class Spec {
      * µ¥Î»
      */
     private String unit;
+    private String value;
 }

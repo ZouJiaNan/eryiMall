@@ -41,9 +41,9 @@ public class OrderDao {
         OrderItemPo orderItemPo = new OrderItemPo();
         orderItemPo.setId(orderItem.getId());
         orderItemPo.setOrderId(orderItem.getOrderId());
-        orderItemPo.setOnSaleId(orderItem.getOnSale().getId());
         orderItemPo.setTotalPrice(orderItem.getTotalPrice());
         orderItemPo.setCount(orderItem.getCount());
+        orderItemPo.setOnSaleId(orderItem.getProduct().getSku().getOnSale().getId());
         orderItemPo.setShipingFee(orderItem.getShipingFee());
         return  orderItemPo;
     }

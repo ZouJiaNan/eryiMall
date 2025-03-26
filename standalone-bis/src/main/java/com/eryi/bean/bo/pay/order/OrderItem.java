@@ -3,6 +3,7 @@ package com.eryi.bean.bo.pay.order;
 import com.eryi.bean.bo.pay.PayTransection;
 import com.eryi.bean.bo.pay.RefundTransection;
 import com.eryi.bean.bo.product.OnSale;
+import com.eryi.bean.bo.product.Product;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -20,7 +21,7 @@ public class OrderItem {
     /**
      * 商铺销售消息
      */
-    private OnSale onSale;
+    private Product product;
     /**
      * 总价
      */

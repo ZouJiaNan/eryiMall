@@ -56,8 +56,9 @@
         p.tags as product_tags,
         p.category_id as product_category_id,
         p.spu->'$.mainImage' as spu_mainImage,
-        o.price as onSale_price
-        from product p join onsale o on p.id=o.product_id
+        p.spu as spu,
+        p.sku as sku
+        from product p
         <where>
             <if test="name != null and name != ''">
                 AND p.name LIKE CONCAT('%', #{name}, '%')
@@ -66,5 +67,18 @@
                 AND p.category_id = #{categoryId}
             </if>
         </where>
+    </select>
+
+    <select id="getProductDetail" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
+        select
+            p.id as product_id,
+            p.name as product_name,
+            p.tags as product_tags,
+            p.category_id as product_category_id,
+            p.spu->'$.mainImage' as spu_mainImage,
+            p.spu as spu,
+            p.sku as sku,
+            o.price as onSale_price
+        from product p join onsale o on p.id=o.product_id  and p.id=#{productId}
     </select>
 </mapper>

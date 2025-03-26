@@ -23,11 +23,11 @@ public class Car {
     private User user;
     private List<CarItem> items;
 
-    public int addCarItem(String carId, String onSaleId)
+    public int addCarItem(String carId, String productId)
     {
         CarItemPo carItemPo=new CarItemPo();
         carItemPo.setCarId(carId);
-        carItemPo.setOnSaleId(onSaleId);
+        carItemPo.setProductId(productId);
         return carDao.addCarItem(carItemPo);
     }
 }
