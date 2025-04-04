@@ -41,7 +41,15 @@
 
     <!-- 根据ID查询 -->
     <select id="getProductById" parameterType="java.lang.String" resultMap="com.eryi.mapper.CommonResultMaps.ProductResultMap">
-        SELECT * FROM product WHERE id = #{id}
+        select
+        p.id as product_id,
+        p.name as product_name,
+        p.tags as product_tags,
+        p.category_id as product_category_id,
+        p.spu->'$.mainImage' as spu_mainImage,
+        p.spu as spu,
+        p.sku as sku
+        from product p WHERE id = #{id}
     </select>
 
     <!-- 查询所有 -->

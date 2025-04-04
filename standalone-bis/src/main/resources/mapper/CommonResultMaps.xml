@@ -88,14 +88,12 @@
         <result property="tags" column="product_tags" />
         <result property="platformDivision" column="product_platform_division" />
         <result property="spu" column="spu"
-                typeHandler="com.eryi.mapper.handler.JsonTypeHandler"
+                typeHandler="com.eryi.mapper.handler.SPUTypeHandler"
                 javaType="com.eryi.bean.bo.product.SPU"/>
-        <association
-                property="sku"
-                javaType="com.eryi.bean.bo.product.SKU"
-                resultMap="SkuResultMap"
-                typeHandler="com.eryi.mapper.handler.JsonTypeHandler"
-                />
+        <result
+                property="skus"
+                column="sku"
+                typeHandler="com.eryi.mapper.handler.ListSKUTypeHandler"/>
         <association property="shipingFeeTemp" javaType="com.eryi.bean.bo.shop.ShipingFeeTemp" resultMap="ShipingFeeTempResultMap"/>
         <association property="category" javaType="com.eryi.bean.bo.product.Category" resultMap="CategoryResultMap"/>
         <association property="shop" javaType="com.eryi.bean.bo.shop.Shop" resultMap="ShopResultMap"/>

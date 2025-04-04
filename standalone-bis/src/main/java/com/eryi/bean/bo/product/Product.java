@@ -57,7 +57,7 @@ public class Product {
     /**
      * 标准库存单元
      */
-    private SKU sku;
+    private List<SKU> skus;
 
     public Product(){
         this.category=new Category();

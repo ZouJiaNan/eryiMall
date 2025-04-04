@@ -43,7 +43,7 @@ public class OrderDao {
         orderItemPo.setOrderId(orderItem.getOrderId());
         orderItemPo.setTotalPrice(orderItem.getTotalPrice());
         orderItemPo.setCount(orderItem.getCount());
-        orderItemPo.setOnSaleId(orderItem.getProduct().getSku().getOnSale().getId());
+        orderItemPo.setOnSaleId(orderItem.getProduct().getSkus().get(0).getOnSale().getId());
         orderItemPo.setShipingFee(orderItem.getShipingFee());
         return  orderItemPo;
     }

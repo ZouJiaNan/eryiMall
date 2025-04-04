@@ -2,6 +2,7 @@ package com.eryi.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.eryi.bean.bo.product.Product;
+import com.eryi.bean.bo.product.SKU;
 import com.eryi.bean.po.ProductPo;
 import com.eryi.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,12 @@ public class ProductDao {
     }
     public int addSKU(String productId,String skuJson){
         Product product=productMapper.getProductById(productId);
+        List<SKU> skus = JSON.parseArray(skuJson, SKU.class);
+        if(product.getSkus()!=null) {
+            skus.addAll(product.getSkus());
+        }
+        product.setSkus(skus);
         ProductPo productPo = BoToPo(product);
-        productPo.setSku(skuJson);
         return productMapper.editProduct(productPo);
     }
     private ProductPo BoToPo(Product product){
@@ -60,6 +65,8 @@ public class ProductDao {
         productPo.setName(product.getName());
         productPo.setTags(product.getTags());
         productPo.setPlatformDivision(product.getPlatformDivision());
+        productPo.setSpu(JSON.toJSONString(product.getSpu()));
+        productPo.setSku(JSON.toJSONString(product.getSkus()));
         return productPo;
     }
 }
