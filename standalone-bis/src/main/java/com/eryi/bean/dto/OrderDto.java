@@ -18,6 +18,9 @@ import java.util.List;
 @Getter
 @Setter
 public class OrderDto {
+    private String orderNum;
+    private String remark;
+    private BigDecimal totalPrice;
     /**
      * ”√ªß
      */

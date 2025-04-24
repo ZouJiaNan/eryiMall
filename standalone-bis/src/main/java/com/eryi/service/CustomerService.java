@@ -5,6 +5,7 @@ import com.eryi.bean.bo.product.Category;
 import com.eryi.bean.bo.product.OnSale;
 import com.eryi.bean.bo.product.Product;
 import com.eryi.bean.po.CategoryPo;
+import com.eryi.bean.po.OrderPo;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface CustomerService {
      * @param order
      * @return
      */
-    int createOrder(Order order);
+    Order createOrder(Order order);
 
     /**
      * 订单新增落库
@@ -50,4 +51,11 @@ public interface CustomerService {
      * @return
      */
     List<Category> getCategorys(CategoryPo categoryPo);
+
+    /**
+     * 根据订单生成支付页面
+     * @param order
+     * @return
+     */
+    String genernatePCAlipayHtml(Order order);
 }

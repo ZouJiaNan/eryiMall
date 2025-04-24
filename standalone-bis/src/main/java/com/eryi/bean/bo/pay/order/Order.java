@@ -68,6 +68,11 @@ public class Order implements Serializable {
      */
     private BigDecimal totalShipingFee;
 
+    /**
+     * ±¸×¢
+     */
+    private String remark;
+
     @JsonCreator
     public Order(@JsonProperty("id") String id) {
         this.id = id;
