@@ -10,6 +10,7 @@ import com.eryi.bean.po.CategoryPo;
 import com.eryi.bean.po.ProductPo;
 import com.eryi.dao.*;
 import com.eryi.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CarDao carDao;
@@ -73,7 +75,6 @@ public class CustomerServiceImpl implements CustomerService {
      * @return
      */
     @Override
-    @Transactional
     public Order createOrder(Order order) {
         CompletableFuture<Object> future1 = new CompletableFuture<>();
         CompletableFuture<Void> future2 = new CompletableFuture<>();
@@ -92,13 +93,13 @@ public class CustomerServiceImpl implements CustomerService {
         rocketMQTemplate.asyncSend(orderTopic, message, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("写流量削峰队列成功：" + sendResult.toString());
+                log.info("写流量削峰队列成功：" + sendResult.toString());
                 future.complete(null);
             }
             @Override
             public void onException(Throwable throwable) {
                 //此处可以考虑加上补偿机制
-                System.out.println("写流量削峰队列失败：" + throwable.getMessage());
+                log.error("写流量削峰队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
         });
@@ -111,12 +112,12 @@ public class CustomerServiceImpl implements CustomerService {
         rocketMQTemplate.asyncSend(orderDelayedTopic, delayedMessage, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-                System.out.println("写延迟队列成功：" + sendResult.toString());
+                log.info("写延迟队列成功：" + sendResult.toString());
                 future.complete(null);
             }
             @Override
             public void onException(Throwable throwable) {
-                System.out.println("写延迟队列失败：" + throwable.getMessage());
+                log.error("写延迟队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
         },3000,1);
