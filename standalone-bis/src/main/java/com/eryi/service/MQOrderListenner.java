@@ -2,6 +2,8 @@ package com.eryi.service;
 
 import com.alibaba.fastjson.JSON;
 import com.eryi.bean.bo.pay.order.Order;
+import com.eryi.bean.bo.product.OnSale;
+import com.eryi.dao.OnSaleDao;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -12,6 +14,7 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQPushConsumerLifecycleListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RocketMQMessageListener(
@@ -25,29 +28,55 @@ public class MQOrderListenner implements RocketMQListener,RocketMQPushConsumerLi
     @Autowired
     CustomerService customerService;
 
+    @Autowired
+    OnSaleDao onSaleDao;
+
     @Override
     public void onMessage(Object o) {
 
     }
 
     @Override
+    @Transactional
     public void prepareStart(DefaultMQPushConsumer defaultMQPushConsumer) {
         defaultMQPushConsumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             for (MessageExt msg : msgs) {
                 try {
-                    //订单落库
                     Order order = JSON.parseObject(msg.getBody(), Order.class);
-                    customerService.addOrder(order);
-                    log.info("订单落库成功:" + order.toString());
+                    //新增订单
+                    if(order.getStatus()==1){
+                        addOrder(order);
+                    }
+                    //支付订单
+                    if(order.getStatus()==2){
+                        payOrder(order);
+                    }
                     // 手动ACK（成功）
                     context.setAckIndex(msgs.indexOf(msg));
                 } catch (Exception e) {
-                    log.info("订单落库失败:" + e.getMessage());
+                    log.info("处理订单失败:" + e.getMessage());
                     // 消息重试（失败）
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }
             }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
+    }
+
+    private void addOrder(Order order){
+        //锁定库存
+        String skuCode = order.getOrderItems().get(0).getProduct().getSkus().get(0).getSkuCode();
+        String productId = order.getOrderItems().get(0).getProduct().getId();
+        OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
+        onSale.lockStock(order);
+
+        //订单落库
+        customerService.addOrder(order);
+        log.info("新增订单:" , order);
+    }
+
+    private void payOrder(Order order){
+        customerService.updateOrder(order);
+        log.info("支付订单:" , order);
     }
 }

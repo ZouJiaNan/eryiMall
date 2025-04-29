@@ -75,18 +75,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Order createOrder(Order order) {
-        //锁定库存
-        String skuCode = order.getOrderItems().get(0).getProduct().getSkus().get(0).getSkuCode();
-        String productId = order.getOrderItems().get(0).getProduct().getId();
-        OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
-        onSale.lockStock(order);
-
         CompletableFuture<Object> future1 = new CompletableFuture<>();
         CompletableFuture<Void> future2 = new CompletableFuture<>();
+        //创建订单
+        createOrder(future1,order);
         //创建半小时延时消息
-        createOrderdelayed(future1,order);
-        //编排线程,创建订单，让写库线程严格在创建延时消息的线程执行完成后再执行
-        future1.thenCompose(delayResult-> createOrder(future2,order));
+        //编排线程,创建延时消息的线程要在创建订单的线程之后执行
+        future1.thenCompose(delayResult->createOrderdelayed(future2,order));
         return order;
     }
 
@@ -102,6 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
             }
             @Override
             public void onException(Throwable throwable) {
+                //此处可以考虑加上补偿机制
                 System.out.println("写流量削峰队列失败：" + throwable.getMessage());
                 future.completeExceptionally(throwable);
             }
@@ -141,6 +137,15 @@ public class CustomerServiceImpl implements CustomerService {
             findOrder.addOrderItem(orderItem);
         }
         return 1;
+    }
+
+    /**
+     *获取商品列表
+     * @return
+     */
+    @Override
+    public int updateOrder(Order order) {
+        return orderDao.updateOrder(order);
     }
 
     @Override

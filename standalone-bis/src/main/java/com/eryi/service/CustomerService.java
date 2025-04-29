@@ -33,6 +33,13 @@ public interface CustomerService {
     int addOrder(Order order);
 
     /**
+     * 编辑订单
+     * @param order
+     * @return
+     */
+    int updateOrder(Order order);
+
+    /**
      *获取商品列表
      * @return
      */
