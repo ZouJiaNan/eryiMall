@@ -87,6 +87,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private CompletableFuture createOrder(CompletableFuture future,Order order){
+        //锁定库存，此处暂时先直接锁数据库，后期改成redis来拉高并发量
+        String skuCode = order.getOrderItems().get(0).getProduct().getSkus().get(0).getSkuCode();
+        String productId = order.getOrderItems().get(0).getProduct().getId();
+        OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
+        onSale.lockStock(order);
+
         //写流量削峰队列
         Message<Order> message = MessageBuilder.withPayload(order)
                 .build();

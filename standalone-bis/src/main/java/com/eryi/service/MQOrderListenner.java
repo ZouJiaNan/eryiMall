@@ -64,12 +64,6 @@ public class MQOrderListenner implements RocketMQListener,RocketMQPushConsumerLi
     }
 
     private void addOrder(Order order){
-        //锁定库存
-        String skuCode = order.getOrderItems().get(0).getProduct().getSkus().get(0).getSkuCode();
-        String productId = order.getOrderItems().get(0).getProduct().getId();
-        OnSale onSale = onSaleDao.findBySkuCodeAndProductId(productId,skuCode);
-        onSale.lockStock(order);
-
         //订单落库
         customerService.addOrder(order);
         log.info("新增订单:" , order);
