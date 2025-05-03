@@ -34,7 +34,7 @@ public class AlipayServiceImpl {
     public final static String GETEWAY_URL ="https://openapi-sandbox.dl.alipaydev.com/gateway.do";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "内网穿透地址/pay/alipay_notify";
+    public static String notify_url = "4rx0252zh567.vicp.fun/pay/alipay_notify";
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
     // public static String return_url = "http://mytest.free.svipss.top/list";
     public static String return_url = "http://www.baidu.com";  // 支付成功 最后一步 跳转 返回的 页面

@@ -176,7 +176,7 @@ public class CustomerController extends BaseController{
      * @param orderDto
      * @return
      */
-    @PostMapping("genernatePCAlipayHtml")
+    @RequestMapping("genernatePCAlipayHtml")
     public ResultBean genernatePCAlipayHtml(OrderDto orderDto){
         Order order=new Order();
         order.setId(orderDto.getOrderNum());
